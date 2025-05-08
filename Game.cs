@@ -18,5 +18,7 @@ public partial class Game : Node2D
         {
             AddChild(cardScene);            
         }
+
+        //cardScene.Position = new Vector3( , 0,);
     }
 }
