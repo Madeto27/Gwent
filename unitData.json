@@ -1,0 +1,25 @@
+{
+    "ballista": {
+        "power": 6,
+        "name" : "Ballista",
+        "desc" : "None",
+        "row"  : 3,
+        "texture": "res://CardTextures/Ballista.png"
+    },
+
+    "dethmold": {
+        "power": 6,
+        "name" : "Dethmold",
+        "desc" : "None",
+        "row"  : 2,
+        "texture": "res://CardTextures/Ballista.png"
+    },
+
+    "poorInfantry": {
+        "power": 1,
+        "name" : "Poor Infantry",
+        "desc" : "Place next to a card with the same name to double the strength of both cards.",
+        "row"  : 1,
+        "texture": "res://CardTextures/Ballista.png"
+    }
+}

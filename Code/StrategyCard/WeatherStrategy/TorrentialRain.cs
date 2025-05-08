@@ -1,0 +1,1 @@
+//Sets all Siege units to strength 1 for both players

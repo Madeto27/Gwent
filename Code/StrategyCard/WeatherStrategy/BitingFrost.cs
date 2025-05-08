@@ -1,0 +1,1 @@
+//Sets all Close combat units to strength 1 for both players
