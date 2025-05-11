@@ -14,6 +14,10 @@ config/name="Gwent"
 run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
+[display]
+
+window/vsync/vsync_mode=0
+
 [dotnet]
 
 project/assembly_name="Gwent"
