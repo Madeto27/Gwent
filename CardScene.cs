@@ -7,7 +7,7 @@ public partial class CardScene : Node2D
     public string desc;
     public string texture;
 
-    private float cardScale = 0.5f;
+    private float cardScale = 0.25f;
 
     private Sprite2D _sprite;
     private Area2D _area;
@@ -15,6 +15,7 @@ public partial class CardScene : Node2D
 
     public override void _Ready()
     {   
+        Position = new Vector2(100, 500);
         GD.Print("CardScene_Ready()");
         //_sprite = GetNode<Sprite2D>("Sprite2D");
 
@@ -57,7 +58,7 @@ public partial class CardScene : Node2D
         _sprite.Texture = tex;
         _sprite.Scale = new Vector2(cardScale, cardScale);
 
-        Vector2 texSize = _sprite.Texture.GetSize();
+        Vector2 texSize = _sprite.Texture.GetSize() * cardScale;
         _collisionShape = GetNode<CollisionShape2D>("Area2D/CollisionShape2D");
 
         if (_collisionShape.Shape is RectangleShape2D rectangleShape)

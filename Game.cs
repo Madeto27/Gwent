@@ -8,17 +8,23 @@ public partial class Game : Node2D
         
         base._Ready();
         
-        UnitCreator creator = new UnitCreator();
-        creator.LoadData();
-        CardScene cardScene = creator.CreateCard("ballista");
+        UnitCreator uCreator = new UnitCreator();
+        uCreator.LoadData();
+        CardScene cardScene = uCreator.CreateCard("ballista");
 
         GD.Print(cardScene.texture.ToString());
 
-        if (cardScene != null)
-        {
+        if (cardScene != null){
             AddChild(cardScene);            
         }
 
+        RowCreator rCreator= new RowCreator();
+        RowScene row3 = rCreator.CreateRow();
+        
+        if (row3 != null){
+            AddChild(row3);            
+        }
+        //GD.Print(row3._area.CollisionMask);
         //cardScene.Position = new Vector3( , 0,);
     }
 }

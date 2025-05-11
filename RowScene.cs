@@ -1,0 +1,59 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class RowScene : Node2D
+{
+    private List<CardScene> children = new List<CardScene>();
+    private float cardScale = 0.25f;
+    private Sprite2D _sprite;
+    public Area2D _area;
+    private CollisionShape2D _collisionShape;
+
+
+    public override void _Ready(){
+        base._Ready();
+        Position = new Vector2(400, 100);
+        //GD.Print($"{_area.CollisionMask}");
+    }
+
+    public void Add(CardScene card){
+        children.Add(card);
+        AddChild(card);
+    }
+
+    public void Remove(CardScene card){
+        children.Remove(card);
+        RemoveChild(card);
+    }
+
+    public int GetPower(){
+        //overall row power
+        return 0;
+    }
+
+    public void Initialize(){
+        if (_sprite == null)
+        {
+            _sprite = GetNode<Sprite2D>("Sprite2D");
+            if (_sprite == null)
+            {
+                GD.PrintErr("Sprite2D not found in scene!");
+                return;
+            }
+        }
+        
+        Texture2D tex = GD.Load<Texture2D>("res://BoardTextures/raw.png");
+        _sprite.Texture = tex;
+        _sprite.Scale = new Vector2(cardScale, cardScale);
+
+        Vector2 texSize = _sprite.Texture.GetSize() * cardScale;
+        _collisionShape = GetNode<CollisionShape2D>("Area2D/CollisionShape2D");
+
+        if (_collisionShape.Shape is RectangleShape2D rectangleShape)
+        {
+            rectangleShape.Size = texSize;
+        }
+
+        //GD.Print($"{_area.CollisionMask}");
+    }
+}
