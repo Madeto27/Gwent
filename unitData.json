@@ -12,7 +12,7 @@
         "name" : "Dethmold",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/Ballista.png"
+        "texture": "res://CardTextures/Dethmold.png"
     },
 
     "poorInfantry": {
@@ -20,6 +20,6 @@
         "name" : "Poor Infantry",
         "desc" : "Place next to a card with the same name to double the strength of both cards.",
         "row"  : 1,
-        "texture": "res://CardTextures/Ballista.png"
+        "texture": "res://CardTextures/PoorInfantry.png"
     }
 }

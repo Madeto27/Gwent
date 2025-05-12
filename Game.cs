@@ -2,29 +2,34 @@ using Godot;
 
 public partial class Game : Node2D
 {
-    
-    //private Sprite2D _ballista;
     public override void _Ready(){
         
         base._Ready();
         
+        //create ballista in Game
         UnitCreator uCreator = new UnitCreator();
         uCreator.LoadData();
-        CardScene cardScene = uCreator.CreateCard("ballista");
+        CardScene ballista = uCreator.CreateCard("ballista");
 
-        GD.Print(cardScene.texture.ToString());
+        GD.Print(ballista.texture.ToString());
 
-        if (cardScene != null){
-            AddChild(cardScene);            
+        if (ballista != null){
+            AddChild(ballista);            
         }
 
+        //create infantry in game
+        CardScene infantry = uCreator.CreateCard("poorInfantry");
+        GD.Print(infantry.texture.ToString());
+        if (infantry != null){
+            AddChild(infantry);
+        }
+
+        //create row in Game
         RowCreator rCreator= new RowCreator();
         RowScene row3 = rCreator.CreateRow();
         
         if (row3 != null){
             AddChild(row3);            
         }
-        //GD.Print(row3._area.CollisionMask);
-        //cardScene.Position = new Vector3( , 0,);
     }
 }
