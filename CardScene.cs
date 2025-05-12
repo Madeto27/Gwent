@@ -5,6 +5,7 @@ public partial class CardScene : Node2D
     public string name; 
     public int power;
     public string desc;
+    public int row;
     public string texture;
 
     private float cardScale = 0.25f;
@@ -37,11 +38,12 @@ public partial class CardScene : Node2D
     }
     
 
-    public void Initialize(string name, int power, string desc, string texture)
+    public void Initialize(string name, int power, string desc, int row, string texture)
     {
         this.name = name;
         this.power = power;
         this.desc = desc;
+        this.row = row;
         this.texture = texture;
 
         if (_sprite == null)

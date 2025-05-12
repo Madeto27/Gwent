@@ -33,12 +33,14 @@ public partial class CardManager : Node2D
             else if (@event.IsReleased()){
                 var rowFound = rayCastCheckForRow();
                 if (rowFound != null && cardBeingDragged != null){
-                    //there is empty slot
-                    cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
-                    //Vector2 globalPos = cardBeingDragged.GlobalPosition;
-                    rowFound.Add(cardBeingDragged);
-                    cardBeingDragged.Position = Vector2.Zero;
-                    cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
+                    if (rowFound.row == cardBeingDragged.row){
+                        //there is empty slot
+                        cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
+                        //Vector2 globalPos = cardBeingDragged.GlobalPosition;
+                        rowFound.Add(cardBeingDragged);
+                        cardBeingDragged.Position = Vector2.Zero;
+                        cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
+                    }
                 }
                 cardBeingDragged = null;
             }

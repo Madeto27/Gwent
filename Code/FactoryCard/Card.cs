@@ -1,3 +1,4 @@
+/*
 public abstract class Card{
     public string name; 
     public int power;
@@ -8,3 +9,4 @@ public abstract class Card{
     //public void Ability(){}
     //special ability
 }
+*/

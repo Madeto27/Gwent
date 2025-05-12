@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public partial class RowScene : Node2D
 {
+    public int row;
     private List<CardScene> children = new List<CardScene>();
     private float cardScale = 0.25f;
     private Sprite2D _sprite;
@@ -12,8 +13,7 @@ public partial class RowScene : Node2D
 
     public override void _Ready(){
         base._Ready();
-        Position = new Vector2(400, 100);
-        //GD.Print($"{_area.CollisionMask}");
+        Position = new Vector2(500, 100);
     }
 
     public void Add(CardScene card){
@@ -31,7 +31,7 @@ public partial class RowScene : Node2D
         return 0;
     }
 
-    public void Initialize(){
+    public void Initialize(int row){
         if (_sprite == null)
         {
             _sprite = GetNode<Sprite2D>("Sprite2D");
@@ -54,6 +54,6 @@ public partial class RowScene : Node2D
             rectangleShape.Size = texSize;
         }
 
-        //GD.Print($"{_area.CollisionMask}");
+        this.row = row;
     }
 }

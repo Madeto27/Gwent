@@ -34,7 +34,7 @@ class UnitCreator : Creator
         unitCard.desc = tempData.GetProperty("desc").GetString();
         unitCard.texture = tempData.GetProperty("texture").GetString();
 
-        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.texture);
+        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture);
         
         return unitCard;
     }
