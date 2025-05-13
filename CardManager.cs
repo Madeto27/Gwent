@@ -3,14 +3,16 @@ using System;
 
 public partial class CardManager : Node2D
 {
-
     const int collisionMaskCard = 1;
     const int collisionMaskRow = 2;
     CardScene cardBeingDragged;
     Vector2 screenSize;
+    
+    PlayerHand playerHandReference;
 
     public override void _Ready(){
         screenSize = GetViewportRect().Size;
+        playerHandReference = GetNode<PlayerHand>("../PlayerHand");
     }
 
     public override void _Process(double delta)
@@ -32,15 +34,17 @@ public partial class CardManager : Node2D
             }
             else if (@event.IsReleased()){
                 var rowFound = rayCastCheckForRow();
-                if (rowFound != null && cardBeingDragged != null){
-                    if (rowFound.row == cardBeingDragged.row){
+                if (rowFound != null && cardBeingDragged != null && rowFound.row == cardBeingDragged.row){
+                    //if (rowFound.row == cardBeingDragged.row){
                         //there is empty slot
+                        playerHandReference.RemoveCardFromHand(cardBeingDragged);
                         cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
-                        //Vector2 globalPos = cardBeingDragged.GlobalPosition;
                         rowFound.Add(cardBeingDragged);
-                        cardBeingDragged.Position = Vector2.Zero;
                         cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
-                    }
+                    //}
+                }
+                else {
+                    playerHandReference.AddCardToHand(cardBeingDragged);
                 }
                 cardBeingDragged = null;
             }

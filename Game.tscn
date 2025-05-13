@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlnjpqbxnocs5"]
+[gd_scene load_steps=4 format=3 uid="uid://dlnjpqbxnocs5"]
 
 [ext_resource type="Script" uid="uid://ch3rt4pxwm3vn" path="res://Game.cs" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://cduoj1mvse3yc" path="res://CardManager.cs" id="2_xkndl"]
+[ext_resource type="Script" uid="uid://c3gufy20weewq" path="res://PlayerHand.cs" id="3_u44n3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wbfu4")
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("2_xkndl")
+
+[node name="PlayerHand" type="Node2D" parent="."]
+script = ExtResource("3_u44n3")

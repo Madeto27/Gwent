@@ -4,8 +4,11 @@ using System.Collections.Generic;
 public partial class RowScene : Node2D
 {
     public int row;
+    //const int rowSize = 10;
+    const int cardWidth = 100;
     private List<CardScene> children = new List<CardScene>();
     private float cardScale = 0.25f;
+    public float centerScreenX;
     private Sprite2D _sprite;
     public Area2D _area;
     private CollisionShape2D _collisionShape;
@@ -13,12 +16,15 @@ public partial class RowScene : Node2D
 
     public override void _Ready(){
         base._Ready();
-        Position = new Vector2(500, 100);
+        centerScreenX = GetViewportRect().Size.X / 2;
+        Position = new Vector2(centerScreenX, 100);
     }
 
-    public void Add(CardScene card){
-        children.Add(card);
-        AddChild(card);
+    public void Add(CardScene cardScene){
+        children.Add(cardScene);
+        AddChild(cardScene);
+        cardScene.Position = Vector2.Zero;
+        UpdateCardPosition();
     }
 
     public void Remove(CardScene card){
@@ -55,5 +61,25 @@ public partial class RowScene : Node2D
         }
 
         this.row = row;
+    }
+    
+    public void UpdateCardPosition(){
+        for (int i = 0; i<children.Count; i++){
+            // Get new card position based on index passed in
+            var newPosition = new Vector2(CalculateCardPosition(i), GlobalPosition.Y);
+            var cardScene = children[i];
+            AnimateCardToPosition(cardScene, newPosition);
+        }  
+    }
+
+    public float CalculateCardPosition(int i){
+        var totalWidth = (children.Count - 1)*cardWidth;
+        var xOffset = centerScreenX + i*cardWidth - totalWidth/2;
+        return xOffset;
+    }
+
+    public void AnimateCardToPosition(CardScene cardScene, Vector2 newPosition){
+        var tween = GetTree().CreateTween();
+        tween.TweenProperty(cardScene, "global_position", newPosition, 0.1);
     }
 }

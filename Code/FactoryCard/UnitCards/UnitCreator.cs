@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text.Json;
 using Godot;
 
@@ -37,5 +38,10 @@ class UnitCreator : Creator
         unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture);
         
         return unitCard;
+    }
+
+    public List<string> GetCardIds()
+    {
+        return data.Keys.ToList();
     }
 }

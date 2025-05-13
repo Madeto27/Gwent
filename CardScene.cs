@@ -8,6 +8,8 @@ public partial class CardScene : Node2D
     public int row;
     public string texture;
 
+    public Vector2 playerHandPosition;
+
     private float cardScale = 0.25f;
 
     private Sprite2D _sprite;
@@ -16,25 +18,7 @@ public partial class CardScene : Node2D
 
     public override void _Ready()
     {   
-        Position = new Vector2(100, 500);
-        GD.Print("CardScene_Ready()");
-        //_sprite = GetNode<Sprite2D>("Sprite2D");
 
-        if (_sprite == null){
-            GD.Print("Sprite not found");
-        }
-        else{
-            GD.Print("Sprite is found");
-        }
-
-        if (string.IsNullOrEmpty(texture))
-        {
-            GD.Print("Texture is null or empty");
-        }
-        else
-        {
-            GD.Print("Texture is set: " + texture);
-        }
     }
     
 

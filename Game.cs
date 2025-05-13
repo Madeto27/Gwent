@@ -2,11 +2,21 @@ using Godot;
 
 public partial class Game : Node2D
 {
+    private State state;
+
+    public void ChangeState(State state){
+        this.state = state;
+    }
+
+
     public override void _Ready(){
         
         base._Ready();
         
+        //ChangeState(new PlayerTurnState(this));
+
         //create ballista in Game
+        /*
         UnitCreator uCreator = new UnitCreator();
         uCreator.LoadData();
         CardScene ballista = uCreator.CreateCard("ballista");
@@ -25,6 +35,7 @@ public partial class Game : Node2D
         if (infantry != null){
             AddChild(infantry);
         }
+        */
 
         //create row in Game
         RowCreator rCreator= new RowCreator();
