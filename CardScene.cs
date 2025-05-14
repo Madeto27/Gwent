@@ -10,14 +10,14 @@ public partial class CardScene : Node2D
     public int amount;
 
     public Vector2 playerHandPosition;
-
+    public ICardAbility ability;
     private float cardScale = 0.25f;
 
     private Sprite2D _sprite;
     private Area2D _area;
     private CollisionShape2D _collisionShape;
 
-    public void Initialize(string name, int power, string desc, int row, string texture, int amount)
+    public void Initialize(string name, int power, string desc, int row, string texture, int amount, ICardAbility ability)
     {
         this.name = name;
         this.power = power;
@@ -25,6 +25,7 @@ public partial class CardScene : Node2D
         this.row = row;
         this.texture = texture;
         this.amount = amount;
+        this.ability = ability;
 
         if (_sprite == null)
         {
@@ -47,5 +48,9 @@ public partial class CardScene : Node2D
         {
             rectangleShape.Size = texSize;
         }
+    }
+
+    public void UseAbility(RowScene rowScene){
+        ability?.Execute(this, rowScene);
     }
 }

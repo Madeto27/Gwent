@@ -35,8 +35,9 @@ class UnitCreator : Creator
         unitCard.desc = tempData.GetProperty("desc").GetString();
         unitCard.texture = tempData.GetProperty("texture").GetString();
         unitCard.amount = tempData.GetProperty("amount").GetInt32();
+        unitCard.ability = CreateAbilityFromDesc(unitCard.desc);
 
-        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture,unitCard.amount);
+        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture, unitCard.amount, unitCard.ability);
         
         return unitCard;
     }
@@ -51,5 +52,22 @@ class UnitCreator : Creator
             return amountProperty.GetInt32();
         }
         return 1;
+    }
+
+    private static readonly Dictionary<string, ICardAbility> AbilityMap = new()
+    {
+        { "Medic", new Medic() },
+        { "TightBond", new TightBond() },
+        { "Spy", new Spy() },
+        { "MoraleBoost", new MoraleBoost() },
+        { "None", null }
+    };
+
+    private ICardAbility CreateAbilityFromDesc(string desc)
+    {
+        if (AbilityMap.TryGetValue(desc, out var ability)){
+            return ability;
+        }
+        return null;
     }
 }

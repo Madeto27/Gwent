@@ -20,7 +20,7 @@
     "blueStripesCommando": {
         "power": 4,
         "name" : "Blue Stripes Commando",
-        "desc" : "Place next to a card with the same name to double the strength of both cards.",
+        "desc" : "TightBond",
         "row"  : 1,
         "texture": "res://CardTextures/BlueStripesCommando.png",
         "amount": 2
@@ -29,7 +29,7 @@
     "dunBannerMedic": {
         "power": 5,
         "name" : "Dun Banner Medic",
-        "desc" : "Choose one car from your discard pile and play it instantly (no Heroes or Special Cards).",
+        "desc" : "Medic",
         "row"  : 3,
         "texture": "res://CardTextures/DunBannerMedic.png",
         "amount": 1
@@ -38,7 +38,7 @@
     "kaedweniSiegeExpert": {
         "power": 1,
         "name" : "Kaed  weni Siege Expert",
-        "desc" : "Adds +1 strength to all units in the row, excluding itself.",
+        "desc" : "MoraleBoost",
         "row"  : 3,
         "texture": "res://CardTextures/KaedweniSiegeExpert.png",
         "amount": 3
@@ -56,7 +56,7 @@
     "poorInfantry": {
         "power": 1,
         "name" : "Poor Infantry",
-        "desc" : "Place next to a card with the same name to double the strength of both cards.",
+        "desc" : "TightBond",
         "row"  : 1,
         "texture": "res://CardTextures/PoorInfantry.png",
         "amount": 2
@@ -65,7 +65,7 @@
     "princeStennis": {
         "power": 5,
         "name" : "Prince Stennis",
-        "desc" : "Place on your opponents battlefield (counts towards their total strength) then draw two new cards from your deck.",
+        "desc" : "Spy",
         "row"  : 1,
         "texture": "res://CardTextures/PrinceStennis.png",
         "amount": 1
