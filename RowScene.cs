@@ -25,6 +25,7 @@ public partial class RowScene : Node2D
         AddChild(cardScene);
         cardScene.Position = Vector2.Zero;
         UpdateCardPosition();
+        cardScene.ZIndex = ZIndex;
     }
 
     public void Remove(CardScene card){
@@ -61,6 +62,7 @@ public partial class RowScene : Node2D
         }
 
         this.row = row;
+        ZIndex = -1;
     }
     
     public void UpdateCardPosition(){

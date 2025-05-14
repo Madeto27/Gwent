@@ -34,7 +34,7 @@ public partial class Game : Node2D
         
         if (row1 != null){
             AddChild(row1);
-            row1.GlobalPosition = new Vector2(1920/2,100);       
+            row1.GlobalPosition = new Vector2(1920/2,100);
         }
     }
 }

@@ -17,12 +17,6 @@ public partial class CardScene : Node2D
     private Area2D _area;
     private CollisionShape2D _collisionShape;
 
-    public override void _Ready()
-    {   
-
-    }
-    
-
     public void Initialize(string name, int power, string desc, int row, string texture, int amount)
     {
         this.name = name;
