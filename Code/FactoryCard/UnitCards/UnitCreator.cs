@@ -34,8 +34,9 @@ class UnitCreator : Creator
         unitCard.row = tempData.GetProperty("row").GetInt32();
         unitCard.desc = tempData.GetProperty("desc").GetString();
         unitCard.texture = tempData.GetProperty("texture").GetString();
+        unitCard.amount = tempData.GetProperty("amount").GetInt32();
 
-        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture);
+        unitCard.Initialize(unitCard.name, unitCard.power, unitCard.desc, unitCard.row, unitCard.texture,unitCard.amount);
         
         return unitCard;
     }
@@ -43,5 +44,12 @@ class UnitCreator : Creator
     public List<string> GetCardIds()
     {
         return data.Keys.ToList();
+    }
+
+    public int GetCardAmount(string cardId){
+        if (data.ContainsKey(cardId) && data[cardId].TryGetProperty("amount", out var amountProperty)){
+            return amountProperty.GetInt32();
+        }
+        return 1;
     }
 }

@@ -4,7 +4,8 @@
         "name" : "Ballista",
         "desc" : "None",
         "row"  : 3,
-        "texture": "res://CardTextures/Ballista.png"
+        "texture": "res://CardTextures/Ballista.png",
+        "amount": 1
     },
 
     "dethmold": {
@@ -12,7 +13,8 @@
         "name" : "Dethmold",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/Dethmold.png"
+        "texture": "res://CardTextures/Dethmold.png",
+        "amount": 1
     },
 
     "blueStripesCommando": {
@@ -20,7 +22,8 @@
         "name" : "Blue Stripes Commando",
         "desc" : "Place next to a card with the same name to double the strength of both cards.",
         "row"  : 1,
-        "texture": "res://CardTextures/BlueStripesCommando.png"
+        "texture": "res://CardTextures/BlueStripesCommando.png",
+        "amount": 2
     },
 
     "dunBannerMedic": {
@@ -28,7 +31,8 @@
         "name" : "Dun Banner Medic",
         "desc" : "Choose one car from your discard pile and play it instantly (no Heroes or Special Cards).",
         "row"  : 3,
-        "texture": "res://CardTextures/DunBannerMedic.png"
+        "texture": "res://CardTextures/DunBannerMedic.png",
+        "amount": 1
     },
 
     "kaedweniSiegeExpert": {
@@ -36,7 +40,8 @@
         "name" : "Kaed  weni Siege Expert",
         "desc" : "Adds +1 strength to all units in the row, excluding itself.",
         "row"  : 3,
-        "texture": "res://CardTextures/KaedweniSiegeExpert.png"
+        "texture": "res://CardTextures/KaedweniSiegeExpert.png",
+        "amount": 3
     },
 
     "keiraMetz": {
@@ -44,7 +49,17 @@
         "name" : "Keira Metz",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/KeiraMetz.png"
+        "texture": "res://CardTextures/KeiraMetz.png",
+        "amount": 1
+    },
+
+    "poorInfantry": {
+        "power": 1,
+        "name" : "Poor Infantry",
+        "desc" : "Place next to a card with the same name to double the strength of both cards.",
+        "row"  : 1,
+        "texture": "res://CardTextures/PrinceStennis.png",
+        "amount": 2
     },
 
     "princeStennis": {
@@ -52,7 +67,8 @@
         "name" : "Prince Stennis",
         "desc" : "Place on your opponents battlefield (counts towards their total strength) then draw two new cards from your deck.",
         "row"  : 1,
-        "texture": "res://CardTextures/PrinceStennis.png"
+        "texture": "res://CardTextures/PrinceStennis.png",
+        "amount": 1
     },
 
     "redanianFootSoldier": {
@@ -60,7 +76,8 @@
         "name" : "Redanian Foot Soldier",
         "desc" : "None",
         "row"  : 1,
-        "texture": "res://CardTextures/RedanianFootSoldier.png"
+        "texture": "res://CardTextures/RedanianFootSoldier.png",
+        "amount": 1
     },
 
     "sabrinaGlevissig": {
@@ -68,7 +85,8 @@
         "name" : "Sabrina Glevissig",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/SabrinaGlevissig.png"
+        "texture": "res://CardTextures/SabrinaGlevissig.png",
+        "amount": 1
     },
 
     "sheldonSkaggs": {
@@ -76,7 +94,8 @@
         "name" : "Sheldon Skaggs",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/SheldonSkaggs.png"
+        "texture": "res://CardTextures/SheldonSkaggs.png",
+        "amount": 1
     },
 
     "siegfriedOfDenesle": {
@@ -84,7 +103,8 @@
         "name" : "Siegfried of Denesle",
         "desc" : "None",
         "row"  : 1,
-        "texture": "res://CardTextures/SiegfriedOfDenesle.png"
+        "texture": "res://CardTextures/SiegfriedOfDenesle.png",
+        "amount": 1
     },
 
     "sileDeTansarville": {
@@ -92,7 +112,8 @@
         "name" : "Sile de Tansarville",
         "desc" : "None",
         "row"  : 2,
-        "texture": "res://CardTextures/SileDeTansarville.png"
+        "texture": "res://CardTextures/SileDeTansarville.png",
+        "amount": 1
     },
 
     "trebuchet": {
@@ -100,7 +121,8 @@
         "name" : "Trebuchet",
         "desc" : "None",
         "row"  : 3,
-        "texture": "res://CardTextures/Trebuchet.png"
+        "texture": "res://CardTextures/Trebuchet.png",
+        "amount": 1
     },
 
     "ves": {
@@ -108,7 +130,8 @@
         "name" : "Ves",
         "desc" : "None",
         "row"  : 1,
-        "texture": "res://CardTextures/Ves.png"
+        "texture": "res://CardTextures/Ves.png",
+        "amount": 1
     },
 
     "yarpenZigrin": {
@@ -116,6 +139,7 @@
         "name" : "Yarpen Zigrin",
         "desc" : "None",
         "row"  : 1,
-        "texture": "res://CardTextures/YarpenZigrin.png"
+        "texture": "res://CardTextures/YarpenZigrin.png",
+        "amount": 1
     }
 }

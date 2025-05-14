@@ -7,6 +7,7 @@ public partial class CardScene : Node2D
     public string desc;
     public int row;
     public string texture;
+    public int amount;
 
     public Vector2 playerHandPosition;
 
@@ -22,13 +23,14 @@ public partial class CardScene : Node2D
     }
     
 
-    public void Initialize(string name, int power, string desc, int row, string texture)
+    public void Initialize(string name, int power, string desc, int row, string texture, int amount)
     {
         this.name = name;
         this.power = power;
         this.desc = desc;
         this.row = row;
         this.texture = texture;
+        this.amount = amount;
 
         if (_sprite == null)
         {

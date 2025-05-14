@@ -5,7 +5,7 @@ using System.Linq;
 
 public partial class PlayerHand : Node2D
 {
-    const int handSize = 8;
+    const int handSize = 10;
     const int cardWidth = 100;
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
@@ -17,11 +17,20 @@ public partial class PlayerHand : Node2D
         UnitCreator uCreator = new UnitCreator();
         uCreator.LoadData();
         
-        var cardIdsList = uCreator.GetCardIds();
-        cardIdsList.Shuffle();
+        List<string> baseCardIdsList = uCreator.GetCardIds();
+        List<string> fullCardIdsList = new List<string>();
 
-        for (int i = 0; i < 3/*handSize*/; i++){
-            CardScene card = uCreator.CreateCard(cardIdsList[i]);
+        foreach (string cardId in baseCardIdsList){
+            int amount = uCreator.GetCardAmount(cardId);
+            for (int i = 0; i < amount; i++){
+                fullCardIdsList.Add(cardId);
+            }
+        }
+
+        fullCardIdsList.Shuffle();
+
+        for (int i = 0; i < handSize; i++){
+            CardScene card = uCreator.CreateCard(fullCardIdsList[i]);
             if (card != null){
                 AddChild(card);
                 AddCardToHand(card);          
