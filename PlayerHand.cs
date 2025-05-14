@@ -54,7 +54,7 @@ public partial class PlayerHand : Node2D
     public void UpdateHandPosition(){
         for (int i = 0; i<playerHand.Count; i++){
             // Get new card position based on index passed in
-            var newPosition = new Vector2(CalculateCardPosition(i), 500);
+            var newPosition = new Vector2(CalculateCardPosition(i), 800);
             var cardScene = playerHand[i];
             cardScene.playerHandPosition = newPosition;
             AnimateCardToPosition(cardScene, newPosition);

@@ -58,7 +58,7 @@
         "name" : "Poor Infantry",
         "desc" : "Place next to a card with the same name to double the strength of both cards.",
         "row"  : 1,
-        "texture": "res://CardTextures/PrinceStennis.png",
+        "texture": "res://CardTextures/PoorInfantry.png",
         "amount": 2
     },
 
