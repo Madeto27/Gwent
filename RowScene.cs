@@ -5,6 +5,7 @@ public partial class RowScene : Node2D
 {
     public int row;
     //const int rowSize = 10;
+    public int power;
     const int cardWidth = 100;
     private List<CardScene> children = new List<CardScene>();
     private float cardScale = 0.25f;
@@ -26,6 +27,7 @@ public partial class RowScene : Node2D
         cardScene.Position = Vector2.Zero;
         UpdateCardPosition();
         cardScene.ZIndex = ZIndex;
+        GD.Print(GetPower());
     }
 
     public void Remove(CardScene card){
@@ -34,8 +36,12 @@ public partial class RowScene : Node2D
     }
 
     public int GetPower(){
-        //overall row power
-        return 0;
+        //можна просто додавати cardScene.power до power в Add()
+        power = 0;
+        foreach(CardScene cardScene in children){
+            power += cardScene.power;
+        }
+        return power;
     }
 
     public void Initialize(int row){

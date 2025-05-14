@@ -8,7 +8,6 @@ public partial class Game : Node2D
         this.state = state;
     }
 
-
     public override void _Ready(){
         
         base._Ready();

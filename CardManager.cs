@@ -30,7 +30,6 @@ public partial class CardManager : Node2D
                 var card = rayCastCheckForCard();
                 if (card != null){
                     cardBeingDragged = card;
-                    GD.Print(cardBeingDragged.ZIndex);
                 }
             }
             else if (@event.IsReleased()){
