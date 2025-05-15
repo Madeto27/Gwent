@@ -4,6 +4,7 @@ public partial class CardScene : Node2D
 {
     public string name; 
     public int power;
+    public int basePower;
     public string desc;
     public int row;
     public string texture;
@@ -21,6 +22,7 @@ public partial class CardScene : Node2D
     {
         this.name = name;
         this.power = power;
+        this.basePower = power;
         this.desc = desc;
         this.row = row;
         this.texture = texture;
@@ -53,4 +55,8 @@ public partial class CardScene : Node2D
     public void UseAbility(RowScene rowScene){
         ability?.Execute(this, rowScene);
     }
+
+    public void ResetPower() {
+        power = basePower;
+    }   
 }

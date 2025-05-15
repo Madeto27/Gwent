@@ -27,9 +27,16 @@ public partial class RowScene : Node2D
         cardScene.Position = Vector2.Zero;
         UpdateCardPosition();
         cardScene.ZIndex = ZIndex;
+
         GD.Print("ROW: BEFORE ABILITY: "+ GetPower());
         GD.Print("CARD: BEFORE ABILITY: "+ cardScene.power);
-        cardScene.UseAbility(this);
+        foreach(CardScene child in children){
+            child.ResetPower();
+        }
+        foreach(CardScene child in children){
+            child.UseAbility(this);
+        }
+        //cardScene.UseAbility(this);
         GD.Print("ROW: AFTER ABILITY: " + GetPower());
         GD.Print("CARD: AFTER ABILITY: "+ cardScene.power);
     }
@@ -49,11 +56,9 @@ public partial class RowScene : Node2D
     }
 
     public void Initialize(int row){
-        if (_sprite == null)
-        {
+        if (_sprite == null){
             _sprite = GetNode<Sprite2D>("Sprite2D");
-            if (_sprite == null)
-            {
+            if (_sprite == null){
                 GD.PrintErr("Sprite2D not found in scene!");
                 return;
             }
@@ -77,7 +82,6 @@ public partial class RowScene : Node2D
     
     public void UpdateCardPosition(){
         for (int i = 0; i<children.Count; i++){
-            // Get new card position based on index passed in
             var newPosition = new Vector2(CalculateCardPosition(i), GlobalPosition.Y);
             var cardScene = children[i];
             AnimateCardToPosition(cardScene, newPosition);

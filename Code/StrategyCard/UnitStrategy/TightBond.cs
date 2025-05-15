@@ -3,11 +3,15 @@ class TightBond : ICardAbility
 {
     public void Execute(CardScene cardScene, RowScene rowScene){
         //Place next to a card with the same name to double the strength of both cards
-        foreach(CardScene cardSame in rowScene.children){
-            if (cardSame.name == cardScene.name && cardSame.GetInstanceId() != cardScene.GetInstanceId()){
-                cardSame.power = cardSame.power * 2;
-                cardScene.power = cardScene.power * 2;
+        int count = 0;
+        foreach (CardScene card in rowScene.children){
+            if (card.name == cardScene.name){
+                count++;
             }
+        }
+
+        for (int i = 0; i < count-1; i++){
+            cardScene.power *= 2;
         }
     }
 }
