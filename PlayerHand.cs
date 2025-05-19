@@ -10,42 +10,52 @@ public partial class PlayerHand : Node2D
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
 
-    public override void _Ready(){
+    public override void _Ready()
+    {
         base._Ready();
+        //on ready draw n amount (10) of cards to hand
         centerScreenX = GetViewportRect().Size.X/2;
+        DeckScene deck = GetNode<DeckScene>("../DeckScene");
+        deck.DeckReady += () => DrawInitialHand(deck);
+    }
 
-        UnitCreator uCreator = new UnitCreator();
-        uCreator.LoadData();
-        
-        List<string> baseCardIdsList = uCreator.GetCardIds();
-        List<string> fullCardIdsList = new List<string>();
-
-        foreach (string cardId in baseCardIdsList){
-            int amount = uCreator.GetCardAmount(cardId);
-            for (int i = 0; i < amount; i++){
-                fullCardIdsList.Add(cardId);
+    public void DrawInitialHand(DeckScene deck)
+    {
+        for (int i = 0; i < handSize; i++)
+        {
+            CardScene card = deck.DrawCard();
+            if (card != null)
+            {
+                AddChild(card);
+                AddCardToHand(card);
             }
         }
 
-        fullCardIdsList.Shuffle();
-
-        for (int i = 0; i < handSize; i++){
-            CardScene card = uCreator.CreateCard(fullCardIdsList[i]);
-            if (card != null){
-                AddChild(card);
-                AddCardToHand(card);          
-            }
+        GD.Print(deck.deck.Count);
+        foreach (CardScene card in deck.deck)
+        {
+            GD.Print(card.name);
+        }
+        GD.Print("-----------------------------");
+        GD.Print(playerHand.Count);
+        foreach (CardScene card in playerHand)
+        {   
+            GD.Print(card.name);
         }
 
         UpdateHandPosition();
     }
 
-    public void AddCardToHand(CardScene cardScene){
-        if (cardScene != null){
-            if (!playerHand.Contains(cardScene)){
+    public void AddCardToHand(CardScene cardScene)
+    {
+        if (cardScene != null)
+        {
+            if (!playerHand.Contains(cardScene))
+            {
                 playerHand.Add(cardScene);
             }
-            else{
+            else
+            {
                 AnimateCardToPosition(cardScene, cardScene.playerHandPosition);
             }
         }
