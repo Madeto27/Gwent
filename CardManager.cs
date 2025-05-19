@@ -7,10 +7,11 @@ public partial class CardManager : Node2D
     const int collisionMaskRow = 2;
     CardScene cardBeingDragged;
     Vector2 screenSize;
-    
     PlayerHand playerHandReference;
+    bool cardPlayedThisTurn = false;
 
-    public override void _Ready(){
+    public override void _Ready()
+    {
         screenSize = GetViewportRect().Size;
         playerHandReference = GetNode<PlayerHand>("../PlayerHand");
     }

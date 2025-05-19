@@ -12,7 +12,7 @@ public partial class CardScene : Node2D
 
     public Vector2 playerHandPosition;
     public ICardAbility ability;
-    private float cardScale = 0.25f;
+    private float cardScale = 0.2f;
 
     private Sprite2D _sprite;
     private Area2D _area;

@@ -6,7 +6,7 @@ using System.Linq;
 public partial class PlayerHand : Node2D
 {
     const int handSize = 10;
-    const int cardWidth = 100;
+    const int cardWidth = 80;
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
 
@@ -31,18 +31,6 @@ public partial class PlayerHand : Node2D
             }
         }
 
-        GD.Print(deck.deck.Count);
-        foreach (CardScene card in deck.deck)
-        {
-            GD.Print(card.name);
-        }
-        GD.Print("-----------------------------");
-        GD.Print(playerHand.Count);
-        foreach (CardScene card in playerHand)
-        {   
-            GD.Print(card.name);
-        }
-
         UpdateHandPosition();
     }
 
@@ -64,7 +52,7 @@ public partial class PlayerHand : Node2D
     public void UpdateHandPosition(){
         for (int i = 0; i<playerHand.Count; i++){
             // Get new card position based on index passed in
-            var newPosition = new Vector2(CalculateCardPosition(i), 800);
+            var newPosition = new Vector2(CalculateCardPosition(i), 1005);
             var cardScene = playerHand[i];
             cardScene.playerHandPosition = newPosition;
             AnimateCardToPosition(cardScene, newPosition);

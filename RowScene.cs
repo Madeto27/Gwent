@@ -8,11 +8,11 @@ public partial class RowScene : Node2D
     public int power;
     const int cardWidth = 100;
     public List<CardScene> children = new List<CardScene>();
-    private float cardScale = 0.25f;
+    private float cardScale = 0.2f;
     public float centerScreenX;
     private Sprite2D _sprite;
     public Area2D _area;
-    private CollisionShape2D _collisionShape;
+    public CollisionShape2D _collisionShape;
 
 
     public override void _Ready(){
