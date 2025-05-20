@@ -13,32 +13,42 @@ public partial class RowScene : Node2D
     private Sprite2D _sprite;
     public Area2D _area;
     public CollisionShape2D _collisionShape;
+    private RichTextLabel _richTextLabel;
 
 
-    public override void _Ready(){
+    public override void _Ready()
+    {
         base._Ready();
         centerScreenX = GetViewportRect().Size.X / 2;
         Position = new Vector2(centerScreenX, 100);
+        _richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
+        _richTextLabel.Scale = new Vector2(cardScale*10, cardScale*10);
+        _richTextLabel.Position = new Vector2(-500,-25);
+        GD.Print(_richTextLabel.Text);
+        GD.Print(_richTextLabel.Visible);
+        GD.Print(_richTextLabel.Position);
     }
 
-    public void Add(CardScene cardScene){
+    public void Add(CardScene cardScene)
+    {
         children.Add(cardScene);
         AddChild(cardScene);
         cardScene.Position = Vector2.Zero;
         UpdateCardPosition();
         cardScene.ZIndex = ZIndex;
 
-        GD.Print("ROW: BEFORE ABILITY: "+ GetPower());
-        GD.Print("CARD: BEFORE ABILITY: "+ cardScene.power);
-        foreach(CardScene child in children){
+        foreach (CardScene child in children)
+        {
             child.ResetPower();
         }
-        foreach(CardScene child in children){
+        foreach (CardScene child in children)
+        {
             child.UseAbility(this);
         }
-        //cardScene.UseAbility(this);
-        GD.Print("ROW: AFTER ABILITY: " + GetPower());
-        GD.Print("CARD: AFTER ABILITY: "+ cardScene.power);
+        _richTextLabel.Text = $"{GetPower()}";
+        GD.Print(_richTextLabel.Text);
+        GD.Print(_richTextLabel.Visible);
+        GD.Print(_richTextLabel.Position);
     }
 
     public void Remove(CardScene card){

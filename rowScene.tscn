@@ -8,6 +8,16 @@
 [node name="RowScene" type="Node2D"]
 script = ExtResource("1_n5foc")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -2350.0
+offset_top = -125.0
+offset_right = -2310.0
+offset_bottom = -85.0
+scale = Vector2(10, 10)
+theme_override_font_sizes/mono_font_size = 1
+text = "0"
+horizontal_alignment = 2
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_h6loj")
 

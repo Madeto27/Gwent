@@ -1,3 +1,4 @@
-public class OpponentTurnState : State{
-
+public partial class OpponentTurnState : State
+{
+    
 }
