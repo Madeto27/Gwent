@@ -3,10 +3,9 @@ using Godot;
 
 public partial class Game : Node2D
 {
-
     [Export] public NodePath initialState;
-        private Dictionary<string, State> _states;
-    private State _currentState;
+    private Dictionary<string, State> _states;
+    public State _currentState { get; private set; }
 
     public void ChangeState(string key)
     {
@@ -14,31 +13,34 @@ public partial class Game : Node2D
         {
             return;
         }
-        _currentState.Exit();
+        
+        if (_currentState != null)
+        {
+            _currentState.Exit();
+        }
         _currentState = _states[key];
         _currentState.Enter();
     }
 
     public override void _Ready()
     {
-        base._Ready();
-
-        /*
         _states = new Dictionary<string, State>();
-        foreach (Node2D node2d in GetChildren())
+
+        var playerTurn = new PlayerTurnState();
+        var enemyTurn = new EnemyTurnState();
+
+        AddChild(playerTurn);
+        AddChild(enemyTurn);
+
+        _states.Add("PlayerTurn", playerTurn);
+        _states.Add("EnemyTurn", enemyTurn);
+
+        foreach (var state in _states.Values)
         {
-            if (node2d is State s)
-            {
-                _states[node2d.Name] = s;
-                s.game = this;
-                s.Ready();
-                s.Exit(); //reset all states
-            }    
+            state.game = this;
         }
 
-        _currentState = GetNode<State>(initialState);
-        _currentState.Enter();
-        */
+        ChangeState("PlayerTurn");
 
         RowCreator rCreator = new RowCreator();
         RowScene row3 = rCreator.CreateRow(3);

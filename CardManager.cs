@@ -8,10 +8,12 @@ public partial class CardManager : Node2D
     CardScene cardBeingDragged;
     Vector2 screenSize;
     PlayerHand playerHandReference;
-    bool cardPlayedThisTurn = false;
+    private Game _game;
+    public bool cardPlayedThisTurn = false;
 
     public override void _Ready()
     {
+        _game = GetNode<Game>("..");
         screenSize = GetViewportRect().Size;
         playerHandReference = GetNode<PlayerHand>("../PlayerHand");
     }
@@ -26,22 +28,30 @@ public partial class CardManager : Node2D
     }
 
     public override void _Input(InputEvent @event){
-        if (@event.IsAction("mouse_button_left")){
-            if (@event.IsPressed()){
+        if (_game._currentState is EnemyTurnState) return;
+        if (@event.IsAction("mouse_button_left"))
+        {
+            if (@event.IsPressed())
+            {
                 var card = rayCastCheckForCard();
-                if (card != null){
+                if (card != null && !cardPlayedThisTurn)
+                {
                     cardBeingDragged = card;
                 }
             }
-            else if (@event.IsReleased()){
+            else if (@event.IsReleased())
+            {
                 var rowFound = rayCastCheckForRow();
-                if (rowFound != null && cardBeingDragged != null && rowFound.row == cardBeingDragged.row){
+                if (rowFound != null && cardBeingDragged != null && rowFound.row == cardBeingDragged.row)
+                {
                     playerHandReference.RemoveCardFromHand(cardBeingDragged);
                     cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
                     rowFound.Add(cardBeingDragged);
                     cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
+                    cardPlayedThisTurn = true;
                 }
-                else {
+                else
+                {
                     playerHandReference.AddCardToHand(cardBeingDragged);
                 }
                 cardBeingDragged = null;
