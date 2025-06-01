@@ -7,6 +7,7 @@ public partial class EnemyHand : Node2D
 {
     const int handSize = 10;
     const int cardWidth = 80;
+    const int handHeight = -65;
     public List<CardScene> enemyHand = new List<CardScene>();
     public float centerScreenX;
 
@@ -52,7 +53,7 @@ public partial class EnemyHand : Node2D
     public void UpdateHandPosition(){
         for (int i = 0; i<enemyHand.Count; i++){
             // Get new card position based on index passed in
-            var newPosition = new Vector2(CalculateCardPosition(i), 0);
+            var newPosition = new Vector2(CalculateCardPosition(i), handHeight);
             var cardScene = enemyHand[i];
             cardScene.playerHandPosition = newPosition;
             AnimateCardToPosition(cardScene, newPosition);

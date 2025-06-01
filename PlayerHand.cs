@@ -7,6 +7,7 @@ public partial class PlayerHand : Node2D
 {
     const int handSize = 10;
     const int cardWidth = 80;
+    const int handHeight = 1005;
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
 
@@ -28,9 +29,10 @@ public partial class PlayerHand : Node2D
             {
                 AddChild(card);
                 AddCardToHand(card);
+                card.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
             }
         }
-
+        
         UpdateHandPosition();
     }
 
@@ -53,7 +55,7 @@ public partial class PlayerHand : Node2D
     public void UpdateHandPosition(){
         for (int i = 0; i<playerHand.Count; i++){
             // Get new card position based on index passed in
-            var newPosition = new Vector2(CalculateCardPosition(i), 1005);
+            var newPosition = new Vector2(CalculateCardPosition(i), handHeight);
             var cardScene = playerHand[i];
             cardScene.playerHandPosition = newPosition;
             AnimateCardToPosition(cardScene, newPosition);
