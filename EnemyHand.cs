@@ -3,23 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class PlayerHand : Node2D
+public partial class EnemyHand : Node2D
 {
     const int handSize = 10;
     const int cardWidth = 80;
-    public List<CardScene> playerHand = new List<CardScene>();
+    public List<CardScene> enemyHand = new List<CardScene>();
     public float centerScreenX;
 
     public override void _Ready()
     {
         base._Ready();
         //on ready draw n amount (10) of cards to hand
-        centerScreenX = GetViewportRect().Size.X/2;
-        DeckScene deck = GetNode<DeckScene>("../DeckScene");
-        deck.DeckReady += () => DrawInitialHand(deck);
+        centerScreenX = GetViewportRect().Size.X / 2;
+        EnemyDeck deck = GetNode<EnemyDeck>("../EnemyDeck");
+        if (deck.GetChildCount() > 0)
+            DrawInitialHand(deck);
+        else
+            deck.DeckReady += () => DrawInitialHand(deck);
     }
 
-    public void DrawInitialHand(DeckScene deck)
+    public void DrawInitialHand(EnemyDeck deck)
     {
         for (int i = 0; i < handSize; i++)
         {
@@ -38,30 +41,26 @@ public partial class PlayerHand : Node2D
     {
         if (cardScene != null)
         {
-            if (!playerHand.Contains(cardScene))
-            {
-                playerHand.Add(cardScene);
-            }
+            if (!enemyHand.Contains(cardScene))
+                enemyHand.Add(cardScene);
             else
-            {
                 AnimateCardToPosition(cardScene, cardScene.playerHandPosition);
-            }
             cardScene.ZIndex = 1;
         }
     }
-    
+
     public void UpdateHandPosition(){
-        for (int i = 0; i<playerHand.Count; i++){
+        for (int i = 0; i<enemyHand.Count; i++){
             // Get new card position based on index passed in
-            var newPosition = new Vector2(CalculateCardPosition(i), 1005);
-            var cardScene = playerHand[i];
+            var newPosition = new Vector2(CalculateCardPosition(i), 0);
+            var cardScene = enemyHand[i];
             cardScene.playerHandPosition = newPosition;
             AnimateCardToPosition(cardScene, newPosition);
         }
     }
 
     public float CalculateCardPosition(int i){
-        var totalWidth = (playerHand.Count - 1)*cardWidth;
+        var totalWidth = (enemyHand.Count - 1)*cardWidth;
         var xOffset = centerScreenX + i*cardWidth - totalWidth/2;
         return xOffset;
     }
@@ -72,8 +71,8 @@ public partial class PlayerHand : Node2D
     }
 
     public void RemoveCardFromHand(CardScene cardScene){
-        if(playerHand.Contains(cardScene)){
-            playerHand.Remove(cardScene);
+        if(enemyHand.Contains(cardScene)){
+            enemyHand.Remove(cardScene);
             UpdateHandPosition();
         }
     }

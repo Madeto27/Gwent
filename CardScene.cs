@@ -15,7 +15,7 @@ public partial class CardScene : Node2D
     private float cardScale = 0.2f;
 
     private Sprite2D _sprite;
-    private Area2D _area;
+    public Area2D _area;
     private CollisionShape2D _collisionShape;
 
     public void Initialize(string name, int power, string desc, int row, string texture, int amount, ICardAbility ability)

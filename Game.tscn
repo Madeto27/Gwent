@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlnjpqbxnocs5"]
+[gd_scene load_steps=10 format=3 uid="uid://dlnjpqbxnocs5"]
 
 [ext_resource type="Script" uid="uid://ch3rt4pxwm3vn" path="res://Game.cs" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://cduoj1mvse3yc" path="res://CardManager.cs" id="2_xkndl"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://lfhduhacmsn0" path="res://DeckScene.cs" id="4_t88pq"]
 [ext_resource type="Texture2D" uid="uid://bhmdq4wjff5ja" path="res://CardTextures/CardBack.png" id="5_r0x5m"]
 [ext_resource type="Script" uid="uid://lx3sttmxajlb" path="res://BattleManager.cs" id="6_r0x5m"]
+[ext_resource type="Script" uid="uid://drod07so4cx40" path="res://EnemyDeck.cs" id="7_joorw"]
+[ext_resource type="Script" uid="uid://dusydgu2cnno6" path="res://EnemyHand.cs" id="8_2vekm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0x5m"]
 size = Vector2(378, 710)
@@ -44,5 +46,17 @@ offset_top = 540.0
 offset_right = 408.0
 offset_bottom = 548.0
 text = "End Turn"
+
+[node name="EnemyDeck" type="Node2D" parent="."]
+position = Vector2(1760, 180)
+script = ExtResource("7_joorw")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyDeck"]
+rotation = 3.14159
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_r0x5m")
+
+[node name="EnemyHand" type="Node2D" parent="."]
+script = ExtResource("8_2vekm")
 
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

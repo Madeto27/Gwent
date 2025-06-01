@@ -8,6 +8,9 @@ public partial class CardManager : Node2D
     CardScene cardBeingDragged;
     Vector2 screenSize;
     PlayerHand playerHandReference;
+    EnemyHand enemyHandReference;
+    DeckScene playerDeckReference;
+    EnemyDeck enemyDeckReference;
     private Game _game;
     public bool cardPlayedThisTurn = false;
 
@@ -16,26 +19,30 @@ public partial class CardManager : Node2D
         _game = GetNode<Game>("..");
         screenSize = GetViewportRect().Size;
         playerHandReference = GetNode<PlayerHand>("../PlayerHand");
+        enemyHandReference = GetNode<EnemyHand>("../EnemyHand");
+        playerDeckReference = GetNode<DeckScene>("../DeckScene");
+        enemyDeckReference = GetNode<EnemyDeck>("../EnemyDeck");
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if (cardBeingDragged != null){
+        if (cardBeingDragged != null)
+        {
             var mousePos = GetGlobalMousePosition();
-            cardBeingDragged.Position = new Vector2(Mathf.Clamp(mousePos.X,0,screenSize.X), Mathf.Clamp(mousePos.Y,0,screenSize.Y));//mousePos;
+            cardBeingDragged.Position = new Vector2(Mathf.Clamp(mousePos.X, 0, screenSize.X), Mathf.Clamp(mousePos.Y, 0, screenSize.Y));//mousePos;
         }
     }
 
-    public override void _Input(InputEvent @event){
+    public override void _Input(InputEvent @event)
+    {
         if (_game._currentState is EnemyTurnState) return;
         if (@event.IsAction("mouse_button_left"))
         {
             if (@event.IsPressed())
             {
                 var card = rayCastCheckForCard();
-                if (card != null && !cardPlayedThisTurn)
-                {
+                if (CanDragCard(card)){
                     cardBeingDragged = card;
                 }
             }
@@ -59,7 +66,8 @@ public partial class CardManager : Node2D
         }
     }
 
-    public CardScene rayCastCheckForCard(){
+    public CardScene rayCastCheckForCard()
+    {
         var spaceState = GetWorld2D().DirectSpaceState;
         var parameters = new PhysicsPointQueryParameters2D();
 
@@ -69,14 +77,16 @@ public partial class CardManager : Node2D
 
         var result = spaceState.IntersectPoint(parameters);
 
-        if(result.Count > 0){
+        if (result.Count > 0)
+        {
             var collider = result[0]["collider"].As<Area2D>();
             return collider.GetParent() as CardScene;
         }
         return null;
     }
 
-    public RowScene rayCastCheckForRow(){
+    public RowScene rayCastCheckForRow()
+    {
         var spaceState = GetWorld2D().DirectSpaceState;
         var parameters = new PhysicsPointQueryParameters2D();
 
@@ -86,10 +96,22 @@ public partial class CardManager : Node2D
 
         var result = spaceState.IntersectPoint(parameters);
 
-        if(result.Count > 0){
+        if (result.Count > 0)
+        {
             var collider = result[0]["collider"].As<Area2D>();
             return collider.GetParent() as RowScene;
         }
         return null;
+    }
+
+    public bool CanDragCard(CardScene cardScene)
+    {
+        if (cardScene == null || cardPlayedThisTurn) return false;
+
+        var parent = cardScene.GetParent();
+        return parent != null &&
+               parent != enemyHandReference &&
+               parent != enemyDeckReference &&
+               parent != playerDeckReference;
     }
 }

@@ -9,6 +9,7 @@ public partial class BattleManager : Node2D
 
     Timer battleTimer;
     Button endTurnButton; 
+
     public override void _Ready()
     {
         base._Ready();
@@ -21,6 +22,7 @@ public partial class BattleManager : Node2D
 
     public void OnEndTurnButtonPressed()
     {
+        if (!GetNode<CardManager>("../CardManager").cardPlayedThisTurn) return;
         EnemyTurn();
     }
 
@@ -35,10 +37,7 @@ public partial class BattleManager : Node2D
     }
 }
 
-/*
- battleTimer.Start();
-        await ToSignal(battleTimer, Timer.SignalName.Timeout);
-*/
+
 //at first play cards with low power
         //then place cards with abilites
         //place cards with highest power
