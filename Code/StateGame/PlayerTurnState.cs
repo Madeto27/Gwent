@@ -10,11 +10,17 @@ public partial class PlayerTurnState : State
         game.GetNode<CardManager>("CardManager").cardPlayedThisTurn = false;
         game.GetNode<Button>("EndTurnButton").Disabled = false;
         game.GetNode<Button>("EndTurnButton").Visible = true;
+        
+        game.GetNode<Button>("EndRoundButton").Disabled = false;
+        game.GetNode<Button>("EndRoundButton").Visible = true;
     }
 
     public override void Exit()
     {
         game.GetNode<Button>("EndTurnButton").Disabled = true;
         game.GetNode<Button>("EndTurnButton").Visible = false;
+
+        game.GetNode<Button>("EndRoundButton").Disabled = true;
+        game.GetNode<Button>("EndRoundButton").Visible = false;
     }
 }

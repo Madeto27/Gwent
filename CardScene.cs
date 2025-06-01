@@ -29,14 +29,8 @@ public partial class CardScene : Node2D
         this.amount = amount;
         this.ability = ability;
 
-        if (_sprite == null)
-        {
+        if (_sprite == null){
             _sprite = GetNode<Sprite2D>("Sprite2D");
-            if (_sprite == null)
-            {
-                GD.PrintErr("Sprite2D not found in scene!");
-                return;
-            }
         }
 
         Texture2D tex = GD.Load<Texture2D>(texture);

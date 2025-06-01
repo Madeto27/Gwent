@@ -24,9 +24,6 @@ public partial class RowScene : Node2D
         _richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
         _richTextLabel.Scale = new Vector2(cardScale*10, cardScale*10);
         _richTextLabel.Position = new Vector2(-500,-25);
-        GD.Print(_richTextLabel.Text);
-        GD.Print(_richTextLabel.Visible);
-        GD.Print(_richTextLabel.Position);
     }
 
     public void Add(CardScene cardScene)
@@ -46,9 +43,6 @@ public partial class RowScene : Node2D
             child.UseAbility(this);
         }
         _richTextLabel.Text = $"{GetPower()}";
-        GD.Print(_richTextLabel.Text);
-        GD.Print(_richTextLabel.Visible);
-        GD.Print(_richTextLabel.Position);
     }
 
     public void Remove(CardScene card){

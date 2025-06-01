@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlnjpqbxnocs5"]
+[gd_scene load_steps=12 format=3 uid="uid://dlnjpqbxnocs5"]
 
 [ext_resource type="Script" uid="uid://ch3rt4pxwm3vn" path="res://Game.cs" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://cduoj1mvse3yc" path="res://CardManager.cs" id="2_xkndl"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://lx3sttmxajlb" path="res://BattleManager.cs" id="6_r0x5m"]
 [ext_resource type="Script" uid="uid://drod07so4cx40" path="res://EnemyDeck.cs" id="7_joorw"]
 [ext_resource type="Script" uid="uid://dusydgu2cnno6" path="res://EnemyHand.cs" id="8_2vekm"]
+[ext_resource type="Script" uid="uid://bn0bqnpobnstc" path="res://PlayerDiscard.cs" id="9_yx171"]
+[ext_resource type="Texture2D" uid="uid://buqumpeddyx7a" path="res://CardTextures/DiscardSlot.png" id="10_yhmtn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0x5m"]
 size = Vector2(378, 710)
@@ -58,5 +60,22 @@ texture = ExtResource("5_r0x5m")
 
 [node name="EnemyHand" type="Node2D" parent="."]
 script = ExtResource("8_2vekm")
+
+[node name="PlayerDiscard" type="Node2D" parent="."]
+position = Vector2(1660, 900)
+script = ExtResource("9_yx171")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerDiscard"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("10_yhmtn")
+
+[node name="EnemyDiscard" type="Node2D" parent="."]
+
+[node name="EndRoundButton" type="Button" parent="."]
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 492.0
+offset_bottom = 531.0
+text = "End Round"
 
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

@@ -12,6 +12,9 @@ public partial class EnemyTurnState : State
 
     private void OnEnemyActionFinished()
     {
-        game.ChangeState("PlayerTurn");
+        //if (enemyChoseToPass)
+        //{ game.enemyPassed = true; }
+
+        game.ChangeState("CheckEnd");
     }
 }

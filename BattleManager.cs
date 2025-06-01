@@ -8,16 +8,28 @@ public partial class BattleManager : Node2D
     //wait 1 second
 
     Timer battleTimer;
-    Button endTurnButton; 
+    Button endTurnButton;
+    Button endRoundButton;
 
     public override void _Ready()
     {
         base._Ready();
         endTurnButton = GetNode<Button>("../EndTurnButton");
         endTurnButton.Pressed += OnEndTurnButtonPressed;
+
+        endRoundButton = GetNode<Button>("../EndRoundButton");
+        endRoundButton.Pressed += OnEndRoundButtonPressed;
+
         battleTimer = GetNode<Timer>("../BattleTimer");
         battleTimer.OneShot = true;
         battleTimer.WaitTime = 1.0;
+    }
+
+    public void OnEndRoundButtonPressed()
+    {
+        if (GetNode<CardManager>("../CardManager").cardPlayedThisTurn) return;
+        GetNode<Game>("..").playerPassed = true;
+        GetNode<Game>("..").ChangeState("CheckEnd");
     }
 
     public void OnEndTurnButtonPressed()
@@ -31,9 +43,50 @@ public partial class BattleManager : Node2D
         endTurnButton.Disabled = true;
         endTurnButton.Visible = false;
         battleTimer.Start();
+
+        var enemyHand = GetNode<EnemyHand>("../EnemyHand").enemyHand;
+        if (enemyHand.Count == 0)
+        {
+            EndEnemyTurn();
+            return;
+        }
+
+        Random rnd = new Random();
+        PlayCard(enemyHand[rnd.Next(0, enemyHand.Count)]);
+
+        //place card 
+
         await ToSignal(battleTimer, Timer.SignalName.Timeout);
 
         GetNode<Game>("..").ChangeState("EnemyTurn");
+    }
+
+    public void PlayCard(CardScene cardScene)
+    {
+        var game = GetNode<Game>("..");
+        var enemyHand = GetNode<EnemyHand>("../EnemyHand");
+        enemyHand.RemoveCardFromHand(cardScene);
+        cardScene.GetParent().RemoveChild(cardScene);
+
+        switch (cardScene.row)
+        {
+            case 1:
+                game.row1Enemy.Add(cardScene);
+                break;
+            case 2:
+                game.row2Enemy.Add(cardScene);
+                break;
+            case 3:
+                game.row3Enemy.Add(cardScene);
+                break;
+        }
+
+        cardScene.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
+    }
+
+    public void EndEnemyTurn()
+    {
+
     }
 }
 
