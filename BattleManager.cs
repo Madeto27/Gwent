@@ -7,9 +7,9 @@ public partial class BattleManager : Node2D
     //draw a card from opponent deck
     //wait 1 second
 
-    Timer battleTimer;
-    Button endTurnButton;
-    Button endRoundButton;
+    public Timer battleTimer;
+    public Button endTurnButton;
+    public Button endRoundButton;
 
     public override void _Ready()
     {
@@ -28,14 +28,25 @@ public partial class BattleManager : Node2D
     public void OnEndRoundButtonPressed()
     {
         if (GetNode<CardManager>("../CardManager").cardPlayedThisTurn) return;
-        GetNode<Game>("..").playerPassed = true;
+        var game = GetNode<Game>("..");
+        game.playerPassed = true;
+
+        game.GetNode<CardManager>("CardManager").ProcessMode = ProcessModeEnum.Disabled;
+        endTurnButton.Disabled = true;
+        endTurnButton.Visible = false;
+        endRoundButton.Disabled = true;
+        endRoundButton.Visible = false;
+
+        game.lastStateWasPlayer = true;
+
         GetNode<Game>("..").ChangeState("CheckEnd");
     }
 
     public void OnEndTurnButtonPressed()
     {
         if (!GetNode<CardManager>("../CardManager").cardPlayedThisTurn) return;
-        EnemyTurn();
+        GetNode<Game>("..").ChangeState("EnemyTurn");
+        //EnemyTurn();
     }
 
     public async void EnemyTurn()
@@ -47,7 +58,6 @@ public partial class BattleManager : Node2D
         var enemyHand = GetNode<EnemyHand>("../EnemyHand").enemyHand;
         if (enemyHand.Count == 0)
         {
-            EndEnemyTurn();
             return;
         }
 

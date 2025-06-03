@@ -6,7 +6,7 @@ public partial class RowScene : Node2D
     public int row;
     //const int rowSize = 10;
     public int power;
-    const int cardWidth = 100;
+    const int cardWidth = 80;
     public List<CardScene> children = new List<CardScene>();
     private float cardScale = 0.2f;
     public float centerScreenX;

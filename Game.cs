@@ -17,6 +17,15 @@ public partial class Game : Node2D
     public RowScene row2Enemy;
     public RowScene row3Enemy;
 
+    public int GetTotalPlayerPower()
+    {
+        return row1.GetPower()+row2.GetPower()+row3.GetPower();
+    }
+
+    public int GetTotalEnemyPower()
+    {
+        return row1Enemy.GetPower()+row2Enemy.GetPower()+row3Enemy.GetPower();
+    }
 
     public void ChangeState(string key)
     {
@@ -31,6 +40,12 @@ public partial class Game : Node2D
         }
         _currentState = _states[key];
         _currentState.Enter();
+    }
+
+    public void ResetPassStates()
+    {
+        playerPassed = false;
+        enemyPassed = false;
     }
 
     public override void _Ready()
