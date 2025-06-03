@@ -1,18 +1,28 @@
+using Godot;
+
 public partial class RoundEndState : State
 {
     public override void Enter()
     {
         base.Enter();
 
-        int playerPower = game.row1.GetPower() + game.row2.GetPower() + game.row3.GetPower();
-        int enemyPower = game.row1Enemy.GetPower() + game.row2Enemy.GetPower() + game.row3Enemy.GetPower();
+        int playerPower = game.GetTotalPlayerPower();
+        int enemyPower = game.GetTotalEnemyPower();
 
-        if (playerPower > enemyPower){
+        if (playerPower > enemyPower)
+        {
+            GetNode<Sprite2D>("../EnemyHP/1HP").Visible = false;
             game.score++;
         }
-        else{
+        else
+        {
+            GetNode<Sprite2D>("../PlayerHP/1HP").Visible = false;
             game.score--;
         }
+
+        //var enemyDiscard = GetNode<EnemyDiscard>("EnemyDiscard");
+        //relocate all cards to each discard pile
+        MoveCardsToDiscard();
 
         game.GetNode<DeckScene>("DeckScene").DrawCard();
         game.GetNode<EnemyDeck>("EnemyDeck").DrawCard();
@@ -21,5 +31,29 @@ public partial class RoundEndState : State
         game.enemyPassed = false;
 
         game.ChangeState("PlayerTurn");
+    }
+
+    void MoveCardsToDiscard()
+    {
+        var playerDiscard = GetNode<PlayerDiscard>("../PlayerDiscard");
+        //var enemyDiscard = GetNode<EnemyDiscard>("EnemyDiscard");
+        foreach (CardScene cardScene in game.row1.children)
+        {
+            cardScene.GetParent().RemoveChild(cardScene);
+            playerDiscard.AddChild(cardScene);
+            cardScene.Position = new Vector2(0, 0);
+        }
+        foreach (CardScene cardScene in game.row2.children)
+        {
+            cardScene.GetParent().RemoveChild(cardScene);
+            playerDiscard.AddChild(cardScene);
+            cardScene.Position = new Vector2(0, 0);
+        }
+        foreach (CardScene cardScene in game.row3.children)
+        {
+            cardScene.GetParent().RemoveChild(cardScene);
+            playerDiscard.AddChild(cardScene);
+            cardScene.Position = new Vector2(0, 0);
+        }
     }
 }
