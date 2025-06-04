@@ -35,6 +35,20 @@ public partial class RowScene : Node2D
         UpdateCardPosition();
         cardScene.ZIndex = ZIndex;
 
+        List<CardScene> childrenCopy = children;
+
+        foreach (CardScene child in childrenCopy)
+        {
+            child.ResetPower();
+        }
+        foreach (CardScene child in childrenCopy)
+        {
+            if (children.Contains(child) && child!=cardScene) child.UseAbility(this);
+        }
+
+        cardScene.UseAbility(this);
+
+        /*
         foreach (CardScene child in children)
         {
             child.ResetPower();
@@ -42,7 +56,7 @@ public partial class RowScene : Node2D
         foreach (CardScene child in children)
         {
             child.UseAbility(this);
-        }
+        }*/
 
         _richTextLabel.Text = $"{GetPower()}";
     }

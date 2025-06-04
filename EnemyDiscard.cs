@@ -13,6 +13,7 @@ public partial class EnemyDiscard : Node2D
 
     public void RemoveFromDiscard(CardScene card)
     {
+        RemoveChild(card);
         discardedCards.Remove(card);
     }
 
