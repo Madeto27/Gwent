@@ -85,7 +85,7 @@ public partial class Game : Node2D
         int enemyRowHeight = 390;
         for (int i = 0; i < 3; i++)
         {
-            enemyRows[i] = rCreator.CreateRow(i);
+            enemyRows[i] = rCreator.CreateRow(i+1);
             if (enemyRows[i] != null)
             {
                 AddChild(enemyRows[i]);
@@ -101,6 +101,5 @@ public partial class Game : Node2D
             AddChild(weatherRow);
             weatherRow.GlobalPosition = new Vector2(1920 / 8, 1080 / 2);
         }
-
     }
 }

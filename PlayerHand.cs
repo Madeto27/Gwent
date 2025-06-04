@@ -24,15 +24,23 @@ public partial class PlayerHand : Node2D
     {
         for (int i = 0; i < handSize; i++)
         {
-            CardScene card = deck.DrawCard();
-            if (card != null)
-            {
-                AddChild(card);
-                AddCardToHand(card);
-                card.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
-            }
+            DrawCard(deck);
         }
         
+        UpdateHandPosition();
+    }
+
+    public void DrawCard(DeckScene deck)
+    {
+        CardScene card = deck.GetTopCard();
+        if (card != null)
+        {
+            card.GlobalPosition = deck.GlobalPosition;
+            AddChild(card);
+            AddCardToHand(card);
+            card.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
+        }
+
         UpdateHandPosition();
     }
 

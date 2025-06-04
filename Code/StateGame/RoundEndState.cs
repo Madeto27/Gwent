@@ -41,8 +41,13 @@ public partial class RoundEndState : State
         //relocate all cards to each discard pile
         MoveCardsToDiscard();
 
-        game.GetNode<DeckScene>("DeckScene").DrawCard();
-        game.GetNode<EnemyDeck>("EnemyDeck").DrawCard();
+        var playerDeck = game.GetNode<DeckScene>("DeckScene");
+        var enemyDeck = game.GetNode<EnemyDeck>("EnemyDeck");
+        var playerHand = game.GetNode<PlayerHand>("PlayerHand");
+        var enemyHand = game.GetNode<EnemyHand>("EnemyHand");
+
+        playerHand.DrawCard(playerDeck);
+        enemyHand.DrawCard(enemyDeck);
 
         game.playerPassed = false;
         game.enemyPassed = false;

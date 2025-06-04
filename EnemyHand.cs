@@ -27,14 +27,20 @@ public partial class EnemyHand : Node2D
     {
         for (int i = 0; i < handSize; i++)
         {
-            CardScene card = deck.DrawCard();
-            if (card != null)
-            {
-                AddChild(card);
-                AddCardToHand(card);
-            }
+            DrawCard(deck);
         }
+        UpdateHandPosition();
+    }
 
+    public void DrawCard(EnemyDeck deck)
+    {
+        CardScene card = deck.GetTopCard();
+        if (card != null)
+        {
+            card.GlobalPosition = deck.GlobalPosition;
+            AddChild(card);
+            AddCardToHand(card);
+        }
         UpdateHandPosition();
     }
 

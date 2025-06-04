@@ -46,7 +46,7 @@ public partial class EnemyDeck : Node2D
         EmitSignal(SignalName.DeckReady);
     }
 
-    public CardScene DrawCard()
+    public CardScene GetTopCard()
     {
         if (deck.Count == 0){
             return null;

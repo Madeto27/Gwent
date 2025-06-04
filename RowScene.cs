@@ -42,16 +42,23 @@ public partial class RowScene : Node2D
         {
             child.UseAbility(this);
         }
+        
         _richTextLabel.Text = $"{GetPower()}";
     }
 
-    public void Remove(CardScene card){
-        children.Remove(card);
+    public void Remove(CardScene card)
+    {
+        var newChildren = new List<CardScene>(children);
+        newChildren.Remove(card);
+        children = newChildren;
+
+        //children.Remove(card);
         RemoveChild(card);
+        UpdateCardPosition(); // Maintain proper positioning
+        _richTextLabel.Text = $"{GetPower()}"; // Update power display
     }
 
     public int GetPower(){
-        //можна просто додавати cardScene.power до power в Add()
         power = 0;
         foreach(CardScene cardScene in children){
             power += cardScene.power;
@@ -99,13 +106,12 @@ public partial class RowScene : Node2D
 
     public float CalculateCardPosition(int i){
         var totalWidth = (children.Count - 1)*cardWidth;
-        float xOffset = 0;
-        if (this.row != 4) {
+        float xOffset;
+        if (this.row != 4)
             xOffset = centerScreenX + i * cardWidth - totalWidth / 2;
-        }
-        else {
+        else
             xOffset = 1920 / 8 + i * cardWidth - totalWidth / 2;
-        }
+
         return xOffset;
     }
 

@@ -1,3 +1,3 @@
 public partial class UnitCard : CardScene {
-    public int row;
+    //public int row;
 }
