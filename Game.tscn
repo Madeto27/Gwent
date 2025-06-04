@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlnjpqbxnocs5"]
+[gd_scene load_steps=16 format=3 uid="uid://dlnjpqbxnocs5"]
 
 [ext_resource type="Script" uid="uid://ch3rt4pxwm3vn" path="res://Game.cs" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://cduoj1mvse3yc" path="res://CardManager.cs" id="2_xkndl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bn0bqnpobnstc" path="res://PlayerDiscard.cs" id="9_yx171"]
 [ext_resource type="Texture2D" uid="uid://buqumpeddyx7a" path="res://CardTextures/DiscardSlot.png" id="10_yhmtn"]
 [ext_resource type="Script" uid="uid://bpg21u4wcs4ty" path="res://PlayerHp.cs" id="11_gwjdr"]
+[ext_resource type="Script" uid="uid://x51f5yn51yo0" path="res://EnemyDiscard.cs" id="11_yyih5"]
 [ext_resource type="Texture2D" uid="uid://bjhgla5qeerhl" path="res://BoardTextures/1HP.png" id="12_lvtmh"]
 [ext_resource type="Script" uid="uid://nuocbc7kuoxe" path="res://EnemyHp.cs" id="13_lvtmh"]
 
@@ -73,6 +74,12 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("10_yhmtn")
 
 [node name="EnemyDiscard" type="Node2D" parent="."]
+position = Vector2(1660, 180)
+script = ExtResource("11_yyih5")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyDiscard"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("10_yhmtn")
 
 [node name="EndRoundButton" type="Button" parent="."]
 offset_left = 400.0

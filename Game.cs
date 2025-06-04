@@ -10,34 +10,34 @@ public partial class Game : Node2D
     public bool playerPassed = false;
     public bool enemyPassed = false;
     public bool lastStateWasPlayer;
-    public RowScene row1;
-    public RowScene row2;
-    public RowScene row3;
-    public RowScene row1Enemy;
-    public RowScene row2Enemy;
-    public RowScene row3Enemy;
+    //public RowScene row1;
+    //public RowScene row2;
+    //public RowScene row3;
+    //public RowScene row1Enemy;
+    //public RowScene row2Enemy;
+    //public RowScene row3Enemy;
+    
+    public RowScene[] playerRows = new RowScene[3];
+    public RowScene[] enemyRows = new RowScene[3];
 
     public int GetTotalPlayerPower()
     {
-        return row1.GetPower()+row2.GetPower()+row3.GetPower();
+        //return row1.GetPower() + row2.GetPower() + row3.GetPower();
+        return playerRows[0].GetPower() + playerRows[1].GetPower()+ playerRows[2].GetPower();
     }
 
     public int GetTotalEnemyPower()
     {
-        return row1Enemy.GetPower()+row2Enemy.GetPower()+row3Enemy.GetPower();
+        //return row1Enemy.GetPower()+row2Enemy.GetPower()+row3Enemy.GetPower();
+        return enemyRows[0].GetPower() + enemyRows[1].GetPower()+ enemyRows[2].GetPower();
     }
 
     public void ChangeState(string key)
     {
-        if (!_states.ContainsKey(key) || _currentState == _states[key])
-        {
-            return;
-        }
+        if (!_states.ContainsKey(key) || _currentState == _states[key]) return;
 
-        if (_currentState != null)
-        {
-            _currentState.Exit();
-        }
+        if (_currentState != null) _currentState.Exit();
+
         _currentState = _states[key];
         _currentState.Enter();
     }
@@ -73,49 +73,34 @@ public partial class Game : Node2D
         }
 
         ChangeState("PlayerTurn");
+        
 
         RowCreator rCreator = new RowCreator();
-        row3 = rCreator.CreateRow(3);
-        if (row3 != null)
+
+        int playerRowHeight = 545;
+        for (int i = 0; i < 3; i++)
         {
-            AddChild(row3);
-            row3.GlobalPosition = new Vector2(1920 / 2, 855);
+            playerRows[i] = rCreator.CreateRow(i+1);
+            if (playerRows[i] != null)
+            {
+                AddChild(playerRows[i]);
+                playerRows[2] = playerRows[i];
+                playerRows[i].GlobalPosition = new Vector2(1920 / 2, playerRowHeight);
+            }
+            playerRowHeight += 155;
         }
 
-        row2 = rCreator.CreateRow(2);
-        if (row2 != null)
+        int enemyRowHeight = 390;
+        for (int i = 0; i < 3; i++)
         {
-            AddChild(row2);
-            row2.GlobalPosition = new Vector2(1920 / 2, 700);
-        }
-
-        row1 = rCreator.CreateRow(1);
-        if (row1 != null)
-        {
-            AddChild(row1);
-            row1.GlobalPosition = new Vector2(1920 / 2, 545);
-        }
-
-        row3Enemy = rCreator.CreateRow(3);
-        if (row3Enemy != null)
-        {
-            row3Enemy._collisionShape.QueueFree();
-            AddChild(row3Enemy);
-            row3Enemy.GlobalPosition = new Vector2(1920 / 2, 80);
-        }
-        row2Enemy = rCreator.CreateRow(2);
-        if (row2Enemy != null)
-        {
-            row2Enemy._collisionShape.QueueFree();
-            AddChild(row2Enemy);
-            row2Enemy.GlobalPosition = new Vector2(1920 / 2, 235);
-        }
-        row1Enemy = rCreator.CreateRow(1);
-        if (row1Enemy != null)
-        {
-            row1Enemy._collisionShape.QueueFree();
-            AddChild(row1Enemy);
-            row1Enemy.GlobalPosition = new Vector2(1920 / 2, 390);
+            enemyRows[i] = rCreator.CreateRow(i);
+            if (enemyRows[i] != null)
+            {
+                AddChild(enemyRows[i]);
+                enemyRows[2] = enemyRows[i];
+                enemyRows[i].GlobalPosition = new Vector2(1920 / 2, enemyRowHeight);
+            }
+            enemyRowHeight -= 155;
         }
     }
 }

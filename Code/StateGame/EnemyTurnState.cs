@@ -3,18 +3,14 @@ using Godot;
 
 public partial class EnemyTurnState : State
 {
-    //private Timer _enemyTimer;
-
     public override void Enter()
     {
         game.GetNode<CardManager>("CardManager").ProcessMode = ProcessModeEnum.Disabled;
-        //OnEnemyActionFinished();
-        //play card
         EnemyTurn();
+        game.lastStateWasPlayer = false;
         game.ChangeState("CheckEnd");
     }
 
-    
     public async void EnemyTurn()
     {
         int playerPower = game.GetTotalPlayerPower();
@@ -43,14 +39,7 @@ public partial class EnemyTurnState : State
 
         await ToSignal(battleManager.battleTimer, Timer.SignalName.Timeout);
 
-        GetNode<Game>("..").ChangeState("CheckEnd");
-    }
 
-    private void OnEnemyActionFinished()
-    {
-        //if (enemyChoseToPass)
-        //{ game.enemyPassed = true; }
-
-        game.ChangeState("CheckEnd");
+        //GetNode<Game>("..").ChangeState("CheckEnd");
     }
 }

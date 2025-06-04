@@ -78,6 +78,8 @@ public partial class BattleManager : Node2D
         enemyHand.RemoveCardFromHand(cardScene);
         cardScene.GetParent().RemoveChild(cardScene);
 
+        game.enemyRows[cardScene.row - 1].Add(cardScene);
+        /*
         switch (cardScene.row)
         {
             case 1:
@@ -89,7 +91,7 @@ public partial class BattleManager : Node2D
             case 3:
                 game.row3Enemy.Add(cardScene);
                 break;
-        }
+        }*/
 
         cardScene.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
     }

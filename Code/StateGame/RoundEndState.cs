@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Numerics;
 using Godot;
 
 public partial class RoundEndState : State
@@ -9,18 +11,33 @@ public partial class RoundEndState : State
         int playerPower = game.GetTotalPlayerPower();
         int enemyPower = game.GetTotalEnemyPower();
 
-        if (playerPower > enemyPower)
-        {
-            GetNode<Sprite2D>("../EnemyHP/1HP").Visible = false;
+        if (playerPower > enemyPower){
             game.score++;
         }
-        else
-        {
-            GetNode<Sprite2D>("../PlayerHP/1HP").Visible = false;
+        else{
             game.score--;
         }
 
-        //var enemyDiscard = GetNode<EnemyDiscard>("EnemyDiscard");
+        switch (game.score)
+        {
+            case 0:
+                GetNode<Sprite2D>("../PlayerHP/1HP").Visible = false;
+                GetNode<Sprite2D>("../EnemyHP/1HP").Visible = false;
+                break;
+            case 1:
+                GetNode<Sprite2D>("../EnemyHP/1HP").Visible = false;
+                break;
+            case 2:
+                GetNode<Sprite2D>("../EnemyHP/2HP").Visible = false; //player Won
+                break;
+            case -1:
+                GetNode<Sprite2D>("../PlayerHP/1HP").Visible = false;
+                break;
+            case -2:
+                GetNode<Sprite2D>("../PlayerHP/2HP").Visible = false; //player Lost
+                break;
+        }
+
         //relocate all cards to each discard pile
         MoveCardsToDiscard();
 
@@ -36,24 +53,30 @@ public partial class RoundEndState : State
     void MoveCardsToDiscard()
     {
         var playerDiscard = GetNode<PlayerDiscard>("../PlayerDiscard");
-        //var enemyDiscard = GetNode<EnemyDiscard>("EnemyDiscard");
-        foreach (CardScene cardScene in game.row1.children)
+        var enemyDiscard = GetNode<EnemyDiscard>("../EnemyDiscard");
+
+        foreach (RowScene rowScene in game.playerRows)
         {
-            cardScene.GetParent().RemoveChild(cardScene);
-            playerDiscard.AddChild(cardScene);
-            cardScene.Position = new Vector2(0, 0);
+            var cards = new List<CardScene>(rowScene.children);
+            foreach (CardScene cardScene in cards)
+            {
+                rowScene.RemoveChild(cardScene);
+                playerDiscard.AddChild(cardScene);
+                cardScene.Position = Godot.Vector2.Zero;
+            }
+            rowScene.children.Clear();
         }
-        foreach (CardScene cardScene in game.row2.children)
+
+        foreach (RowScene rowScene in game.enemyRows)
         {
-            cardScene.GetParent().RemoveChild(cardScene);
-            playerDiscard.AddChild(cardScene);
-            cardScene.Position = new Vector2(0, 0);
-        }
-        foreach (CardScene cardScene in game.row3.children)
-        {
-            cardScene.GetParent().RemoveChild(cardScene);
-            playerDiscard.AddChild(cardScene);
-            cardScene.Position = new Vector2(0, 0);
+            var cards = new List<CardScene>(rowScene.children);
+            foreach (CardScene cardScene in cards)
+            {
+                rowScene.RemoveChild(cardScene);
+                enemyDiscard.AddChild(cardScene);
+                cardScene.Position = Godot.Vector2.Zero;
+            }
+            rowScene.children.Clear();
         }
     }
 }
