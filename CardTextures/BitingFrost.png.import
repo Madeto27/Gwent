@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wbjroujgo2as"
-path="res://.godot/imported/raw.png-7cf106aee0f72081196eeac65fc5e039.ctex"
+uid="uid://clxokfo2amb8"
+path="res://.godot/imported/BitingFrost.png-fd67292c101f833c3a9bfe0941ace931.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BoardTextures/raw.png"
-dest_files=["res://.godot/imported/raw.png-7cf106aee0f72081196eeac65fc5e039.ctex"]
+source_file="res://CardTextures/BitingFrost.png"
+dest_files=["res://.godot/imported/BitingFrost.png-fd67292c101f833c3a9bfe0941ace931.ctex"]
 
 [params]
 

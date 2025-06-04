@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buqumpeddyx7a"
-path="res://.godot/imported/DiscardSlot.png-989e3156bf8a111d27301e743aca7e43.ctex"
+uid="uid://6uig4ex6ju6q"
+path="res://.godot/imported/ClearWeather.png-66fd2e649a146178f06742b604d31103.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CardTextures/DiscardSlot.png"
-dest_files=["res://.godot/imported/DiscardSlot.png-989e3156bf8a111d27301e743aca7e43.ctex"]
+source_file="res://CardTextures/ClearWeather.png"
+dest_files=["res://.godot/imported/ClearWeather.png-66fd2e649a146178f06742b604d31103.ctex"]
 
 [params]
 

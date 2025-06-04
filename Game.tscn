@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://drod07so4cx40" path="res://EnemyDeck.cs" id="7_joorw"]
 [ext_resource type="Script" uid="uid://dusydgu2cnno6" path="res://EnemyHand.cs" id="8_2vekm"]
 [ext_resource type="Script" uid="uid://bn0bqnpobnstc" path="res://PlayerDiscard.cs" id="9_yx171"]
-[ext_resource type="Texture2D" uid="uid://buqumpeddyx7a" path="res://CardTextures/DiscardSlot.png" id="10_yhmtn"]
+[ext_resource type="Texture2D" uid="uid://ucf61qkkr4qr" path="res://BoardTextures/DiscardSlotThick.png" id="10_yyih5"]
 [ext_resource type="Script" uid="uid://bpg21u4wcs4ty" path="res://PlayerHp.cs" id="11_gwjdr"]
 [ext_resource type="Script" uid="uid://x51f5yn51yo0" path="res://EnemyDiscard.cs" id="11_yyih5"]
 [ext_resource type="Texture2D" uid="uid://bjhgla5qeerhl" path="res://BoardTextures/1HP.png" id="12_lvtmh"]
@@ -71,7 +71,7 @@ script = ExtResource("9_yx171")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerDiscard"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("10_yhmtn")
+texture = ExtResource("10_yyih5")
 
 [node name="EnemyDiscard" type="Node2D" parent="."]
 position = Vector2(1660, 180)
@@ -79,7 +79,7 @@ script = ExtResource("11_yyih5")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemyDiscard"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("10_yhmtn")
+texture = ExtResource("10_yyih5")
 
 [node name="EndRoundButton" type="Button" parent="."]
 offset_left = 400.0
@@ -111,5 +111,7 @@ texture = ExtResource("12_lvtmh")
 [node name="2HP" type="Sprite2D" parent="EnemyHP"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("12_lvtmh")
+
+[node name="WheatherRow" type="Node2D" parent="."]
 
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

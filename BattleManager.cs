@@ -78,27 +78,12 @@ public partial class BattleManager : Node2D
         enemyHand.RemoveCardFromHand(cardScene);
         cardScene.GetParent().RemoveChild(cardScene);
 
-        game.enemyRows[cardScene.row - 1].Add(cardScene);
-        /*
-        switch (cardScene.row)
-        {
-            case 1:
-                game.row1Enemy.Add(cardScene);
-                break;
-            case 2:
-                game.row2Enemy.Add(cardScene);
-                break;
-            case 3:
-                game.row3Enemy.Add(cardScene);
-                break;
-        }*/
+        if (cardScene.row != 4)
+            game.enemyRows[cardScene.row - 1].Add(cardScene);
+        else
+            game.weatherRow.Add(cardScene);
 
         cardScene.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
-    }
-
-    public void EndEnemyTurn()
-    {
-
     }
 }
 

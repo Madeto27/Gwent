@@ -10,25 +10,17 @@ public partial class Game : Node2D
     public bool playerPassed = false;
     public bool enemyPassed = false;
     public bool lastStateWasPlayer;
-    //public RowScene row1;
-    //public RowScene row2;
-    //public RowScene row3;
-    //public RowScene row1Enemy;
-    //public RowScene row2Enemy;
-    //public RowScene row3Enemy;
-    
     public RowScene[] playerRows = new RowScene[3];
     public RowScene[] enemyRows = new RowScene[3];
+    public RowScene weatherRow;
 
     public int GetTotalPlayerPower()
     {
-        //return row1.GetPower() + row2.GetPower() + row3.GetPower();
-        return playerRows[0].GetPower() + playerRows[1].GetPower()+ playerRows[2].GetPower();
+        return playerRows[0].GetPower() + playerRows[1].GetPower() + playerRows[2].GetPower();
     }
 
     public int GetTotalEnemyPower()
     {
-        //return row1Enemy.GetPower()+row2Enemy.GetPower()+row3Enemy.GetPower();
         return enemyRows[0].GetPower() + enemyRows[1].GetPower()+ enemyRows[2].GetPower();
     }
 
@@ -73,14 +65,14 @@ public partial class Game : Node2D
         }
 
         ChangeState("PlayerTurn");
-        
+
 
         RowCreator rCreator = new RowCreator();
 
         int playerRowHeight = 545;
         for (int i = 0; i < 3; i++)
         {
-            playerRows[i] = rCreator.CreateRow(i+1);
+            playerRows[i] = rCreator.CreateRow(i + 1);
             if (playerRows[i] != null)
             {
                 AddChild(playerRows[i]);
@@ -102,5 +94,13 @@ public partial class Game : Node2D
             }
             enemyRowHeight -= 155;
         }
+
+        weatherRow = rCreator.CreateRow(4);
+        if (weatherRow != null)
+        {
+            AddChild(weatherRow);
+            weatherRow.GlobalPosition = new Vector2(1920 / 8, 1080 / 2);
+        }
+
     }
 }

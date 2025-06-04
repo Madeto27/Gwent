@@ -67,8 +67,13 @@ public partial class RowScene : Node2D
                 return;
             }
         }
-        
-        Texture2D tex = GD.Load<Texture2D>("res://BoardTextures/raw.png");
+
+        Texture2D tex;
+        if (row == 4)
+            tex = GD.Load<Texture2D>("res://BoardTextures/WeatherRow.png");
+        else
+            tex = GD.Load<Texture2D>("res://BoardTextures/Row.png");
+
         _sprite.Texture = tex;
         _sprite.Scale = new Vector2(cardScale, cardScale);
 
@@ -94,7 +99,13 @@ public partial class RowScene : Node2D
 
     public float CalculateCardPosition(int i){
         var totalWidth = (children.Count - 1)*cardWidth;
-        var xOffset = centerScreenX + i*cardWidth - totalWidth/2;
+        float xOffset = 0;
+        if (this.row != 4) {
+            xOffset = centerScreenX + i * cardWidth - totalWidth / 2;
+        }
+        else {
+            xOffset = 1920 / 8 + i * cardWidth - totalWidth / 2;
+        }
         return xOffset;
     }
 
