@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class RowScene : Node2D
 {
@@ -13,7 +14,7 @@ public partial class RowScene : Node2D
     private Sprite2D _sprite;
     public Area2D _area;
     public CollisionShape2D _collisionShape;
-    private RichTextLabel _richTextLabel;
+    public RichTextLabel _richTextLabel;
 
 
     public override void _Ready()
@@ -42,7 +43,7 @@ public partial class RowScene : Node2D
         {
             child.UseAbility(this);
         }
-        
+
         _richTextLabel.Text = $"{GetPower()}";
     }
 

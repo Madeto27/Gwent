@@ -65,9 +65,15 @@ public partial class RoundEndState : State
             var cards = new List<CardScene>(rowScene.children);
             foreach (CardScene cardScene in cards)
             {
+                Godot.Vector2 originalPosition = cardScene.GlobalPosition;
+
                 rowScene.RemoveChild(cardScene);
+                rowScene._richTextLabel.Text = $"{rowScene.GetPower()}";
                 playerDiscard.AddChild(cardScene);
-                cardScene.Position = Godot.Vector2.Zero;
+                playerDiscard.AddToDiscard(cardScene);
+
+                cardScene.GlobalPosition = originalPosition;
+                playerDiscard.AnimateCardToPosition(cardScene, playerDiscard.GlobalPosition);
             }
             rowScene.children.Clear();
         }
@@ -77,9 +83,15 @@ public partial class RoundEndState : State
             var cards = new List<CardScene>(rowScene.children);
             foreach (CardScene cardScene in cards)
             {
+                Godot.Vector2 originalPosition = cardScene.GlobalPosition;
+
                 rowScene.RemoveChild(cardScene);
+                rowScene._richTextLabel.Text = $"{rowScene.GetPower()}";
                 enemyDiscard.AddChild(cardScene);
-                cardScene.Position = Godot.Vector2.Zero;
+                enemyDiscard.AddToDiscard(cardScene);
+
+                cardScene.GlobalPosition = originalPosition;
+                enemyDiscard.AnimateCardToPosition(cardScene, enemyDiscard.GlobalPosition);
             }
             rowScene.children.Clear();
         }

@@ -112,6 +112,4 @@ texture = ExtResource("12_lvtmh")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("12_lvtmh")
 
-[node name="WheatherRow" type="Node2D" parent="."]
-
 [connection signal="pressed" from="EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]
