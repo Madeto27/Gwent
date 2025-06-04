@@ -9,7 +9,7 @@ class Medic : ICardAbility
         var game = rowScene.GetNode<Game>("..");
         if (game == null) return;
         cardScene.ability = null;
-        
+
         Random rnd = new Random();//has to change! CHOOSE
 
         CardScene randomCard;
@@ -18,6 +18,7 @@ class Medic : ICardAbility
         {
             //Player
             var discard = game.GetNode<PlayerDiscard>("PlayerDiscard");
+            if (discard.discardedCards.Count == 0) return;
             randomCard = discard.discardedCards[rnd.Next(0, discard.discardedCards.Count)];
             discard.RemoveFromDiscard(randomCard);
         }
@@ -25,6 +26,7 @@ class Medic : ICardAbility
         {
             //Enemy
             var discard = game.GetNode<EnemyDiscard>("EnemyDiscard");
+            if (discard.discardedCards.Count == 0) return;
             randomCard = discard.discardedCards[rnd.Next(0, discard.discardedCards.Count)];
             discard.RemoveFromDiscard(randomCard);
         }
