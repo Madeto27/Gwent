@@ -24,22 +24,55 @@ public partial class EnemyTurnState : State
         var enemyHand = GetNode<EnemyHand>("../EnemyHand").enemyHand;
         if (enemyHand.Count == 0)
         {
-            GetNode<Game>("..").enemyPassed = true;
+            game.enemyPassed = true;
             return;
         }
 
-        if (GetNode<Game>("..").playerPassed && playerPower < enemyPower)
+        if (game.playerPassed && playerPower < enemyPower)
         {
-            GetNode<Game>("..").enemyPassed = true;
+            game.enemyPassed = true;
             return;
         }
 
         Random rnd = new Random();
-        battleManager.PlayCard(enemyHand[rnd.Next(0, enemyHand.Count)]);
+        bool choiceIsMade = false;
+        CardScene nextCard = new CardScene();
+        int count = 0;
+        while (!choiceIsMade && count < 5)
+        {
+            nextCard = enemyHand[rnd.Next(0, enemyHand.Count)];
+            count++;
+
+            if (nextCard.row != 4 || !RowHasCardWithSameName(nextCard))
+            {
+                choiceIsMade = true;
+            }
+        }
+
+        if (!choiceIsMade)
+        {
+            game.enemyPassed = true;
+            GD.Print("ENEMY PASSED");
+            return;
+        }
 
         await ToSignal(battleManager.battleTimer, Timer.SignalName.Timeout);
 
-
-        //GetNode<Game>("..").ChangeState("CheckEnd");
+        if (!game.enemyPassed)
+        {
+            battleManager.PlayCard(nextCard);
+        }
+    }
+    public bool RowHasCardWithSameName(CardScene excludeCard)
+    {
+        var game = GetNode<Game>("..");
+        foreach (CardScene child in game.weatherRow.children)
+        {
+            if (child.name == excludeCard.name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

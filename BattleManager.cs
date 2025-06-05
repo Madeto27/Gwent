@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 
 public partial class BattleManager : Node2D
 {
-    //draw a card from opponent deck
-    //wait 1 second
-
     public Timer battleTimer;
     public Button endTurnButton;
     public Button endRoundButton;
@@ -22,7 +19,7 @@ public partial class BattleManager : Node2D
 
         battleTimer = GetNode<Timer>("../BattleTimer");
         battleTimer.OneShot = true;
-        battleTimer.WaitTime = 1.0;
+        battleTimer.WaitTime = 2.0;
     }
 
     public void OnEndRoundButtonPressed()
@@ -49,6 +46,7 @@ public partial class BattleManager : Node2D
         //EnemyTurn();
     }
 
+    /*
     public async void EnemyTurn()
     {
         endTurnButton.Disabled = true;
@@ -62,14 +60,15 @@ public partial class BattleManager : Node2D
         }
 
         Random rnd = new Random();
+
+        await ToSignal(battleTimer, Timer.SignalName.Timeout);
         PlayCard(enemyHand[rnd.Next(0, enemyHand.Count)]);
 
         //place card 
-
-        await ToSignal(battleTimer, Timer.SignalName.Timeout);
+        //await ToSignal(battleTimer, Timer.SignalName.Timeout);
 
         GetNode<Game>("..").ChangeState("EnemyTurn");
-    }
+    }*/
 
     public void PlayCard(CardScene cardScene)
     {
@@ -77,14 +76,13 @@ public partial class BattleManager : Node2D
         var enemyHand = GetNode<EnemyHand>("../EnemyHand");
         enemyHand.RemoveCardFromHand(cardScene);
         cardScene.GetParent().RemoveChild(cardScene);
-
         if (cardScene.row != 4)
             game.enemyRows[cardScene.row - 1].Add(cardScene);
         else
             game.weatherRow.Add(cardScene);
-
         cardScene.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
     }
+
 }
 
 

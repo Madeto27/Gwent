@@ -43,7 +43,7 @@ class Medic : ICardAbility
             targetRow.Add(randomCard);
         }
 
-        randomCard.ResetPower();
+        randomCard.UpdatePower();
         randomCard.UseAbility(rowScene);        
     }
 }
