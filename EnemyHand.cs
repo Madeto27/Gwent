@@ -40,6 +40,8 @@ public partial class EnemyHand : Node2D
             card.GlobalPosition = deck.GlobalPosition;
             AddChild(card);
             AddCardToHand(card);
+            card._circle.Visible = true;
+            card._number.Visible = true;
         }
         UpdateHandPosition();
     }

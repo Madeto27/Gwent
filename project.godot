@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gwent"
-run/main_scene="res://Game.tscn"
+run/main_scene="uid://chf36jaas3nu7"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
 [display]

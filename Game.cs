@@ -88,6 +88,7 @@ public partial class Game : Node2D
             enemyRows[i] = rCreator.CreateRow(i+1);
             if (enemyRows[i] != null)
             {
+                enemyRows[i]._collisionShape.QueueFree();
                 AddChild(enemyRows[i]);
                 enemyRows[2] = enemyRows[i];
                 enemyRows[i].GlobalPosition = new Vector2(1920 / 2, enemyRowHeight);

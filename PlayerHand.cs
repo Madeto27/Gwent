@@ -39,6 +39,8 @@ public partial class PlayerHand : Node2D
             AddChild(card);
             AddCardToHand(card);
             card.GetNode<AnimationPlayer>("AnimationPlayer").Play("card_flip");
+            card._circle.Visible = true;
+            card._number.Visible = true;
         }
 
         UpdateHandPosition();
