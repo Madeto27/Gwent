@@ -60,6 +60,10 @@ class UnitCreator : Creator
         { "TightBond", new TightBond() },
         { "Spy", new Spy() },
         { "MoraleBoost", new MoraleBoost() },
+        { "BitingFrost", new BitingFrost()},
+        { "TorrentialRain", new TorrentialRain()},
+        { "ImpenetrableFog", new ImpenetrableFog()},
+        { "ClearWeather", new ClearWeather()},
         { "None", null }
     };
 

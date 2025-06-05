@@ -42,7 +42,8 @@ public partial class CardManager : Node2D
             if (@event.IsPressed())
             {
                 var card = rayCastCheckForCard();
-                if (CanDragCard(card)){
+                if (CanDragCard(card))
+                {
                     cardBeingDragged = card;
                 }
             }
@@ -51,11 +52,18 @@ public partial class CardManager : Node2D
                 var rowFound = rayCastCheckForRow();
                 if (rowFound != null && cardBeingDragged != null && rowFound.row == cardBeingDragged.row)
                 {
-                    playerHandReference.RemoveCardFromHand(cardBeingDragged);
-                    cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
-                    rowFound.Add(cardBeingDragged);
-                    cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
-                    cardPlayedThisTurn = true;
+                    if (rowFound.row == 4 && RowHasCardWithSameName(rowFound, cardBeingDragged))
+                    {
+                        playerHandReference.AddCardToHand(cardBeingDragged);
+                    }
+                    else
+                    {
+                        playerHandReference.RemoveCardFromHand(cardBeingDragged);
+                        cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
+                        rowFound.Add(cardBeingDragged);
+                        cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
+                        cardPlayedThisTurn = true;
+                    }
                 }
                 else
                 {
@@ -113,5 +121,23 @@ public partial class CardManager : Node2D
                parent != enemyHandReference &&
                parent != enemyDeckReference &&
                parent != playerDeckReference;
+    }
+    
+    public bool RowHasCardWithSameName(RowScene row,  CardScene excludeCard)
+    {
+        foreach (Node child in row.GetChildren())
+        {
+            if (child == excludeCard)
+                continue;
+
+            if (child is CardScene cardInRow)
+            {
+                if (cardInRow.name == excludeCard.name)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

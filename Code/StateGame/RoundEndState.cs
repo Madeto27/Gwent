@@ -95,5 +95,18 @@ public partial class RoundEndState : State
             }
             rowScene.children.Clear();
         }
+
+        foreach (CardScene cardScene in game.weatherRow.children)
+        {
+            Godot.Vector2 originalPosition = cardScene.GlobalPosition;
+
+            game.weatherRow.RemoveChild(cardScene);
+            enemyDiscard.AddChild(cardScene);
+            enemyDiscard.AddToDiscard(cardScene);
+
+            cardScene.GlobalPosition = originalPosition;
+            enemyDiscard.AnimateCardToPosition(cardScene, enemyDiscard.GlobalPosition); //
+        }
+        game.weatherRow.children.Clear();
     }
 }

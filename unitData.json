@@ -146,7 +146,7 @@
     "bitingFrost": {
         "power": 0,
         "name" : "Biting Frost",
-        "desc" : "None",
+        "desc" : "BitingFrost",
         "row"  : 4,
         "texture": "res://CardTextures/BitingFrost.png",
         "amount": 2
@@ -155,7 +155,7 @@
     "clearWeather": {
         "power": 0,
         "name" : "Clear Weather",
-        "desc" : "None",
+        "desc" : "ClearWeather",
         "row"  : 4,
         "texture": "res://CardTextures/ClearWeather.png",
         "amount": 1
@@ -164,7 +164,7 @@
     "impenetrableFog": {
         "power": 0,
         "name" : "Impenetrable Fog",
-        "desc" : "None",
+        "desc" : "ImpenetrableFog",
         "row"  : 4,
         "texture": "res://CardTextures/ImpenetrableFog.png",
         "amount": 2
@@ -173,7 +173,7 @@
     "torrentialRain": {
         "power": 0,
         "name" : "Torrential Rain",
-        "desc" : "None",
+        "desc" : "TorrentialRain",
         "row"  : 4,
         "texture": "res://CardTextures/TorrentialRain.png",
         "amount": 1

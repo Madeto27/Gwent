@@ -5,7 +5,9 @@ using System.Linq;
 public partial class RowScene : Node2D
 {
     public int row;
-    //const int rowSize = 10;
+    const int rowSize = 10;
+    const int weatherSize = 3;
+    public bool isFull;
     public int power;
     const int cardWidth = 80;
     public List<CardScene> children = new List<CardScene>();
@@ -20,6 +22,7 @@ public partial class RowScene : Node2D
     public override void _Ready()
     {
         base._Ready();
+        WeatherManager.Instance.Register(this);
         centerScreenX = GetViewportRect().Size.X / 2;
         Position = new Vector2(centerScreenX, 100);
         _richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
@@ -35,29 +38,63 @@ public partial class RowScene : Node2D
         UpdateCardPosition();
         cardScene.ZIndex = ZIndex;
 
+        bool[] activeWeather = WeatherManager.Instance.activeWeather;
+        if (row == 1) cardScene.isWeatherAffected = activeWeather[1];
+        else if (row == 2) cardScene.isWeatherAffected = activeWeather[2];
+        else if (row == 3) cardScene.isWeatherAffected = activeWeather[3];
+
         List<CardScene> childrenCopy = children;
+        //var weather = GetNode<WeatherManager>("../WeatherManager");
+        //OnWeatherChanged(weather.activeWeather); //АБІЛКИ НЕ РАХУЮТЬСЯ ЧОГОСЬ
 
         foreach (CardScene child in childrenCopy)
         {
-            child.ResetPower();
+            child.UpdatePower();
+            //child.ResetPower();
         }
-        foreach (CardScene child in childrenCopy)
+        foreach (CardScene child in children)
         {
-            if (children.Contains(child) && child!=cardScene) child.UseAbility(this);
+            if (children.Contains(child) && child != cardScene)
+            {
+                child.UseAbility(this);
+                child.UpdatePowerLabel(); //nothing happens if card placed after
+                //child.UpdatePower(); //nothing happens if card placed after, BUT if another weather card placed it fixes
+            }
         }
+
+        //коли додаю нову погоду, то стара реаплаїться
+        //так як вони в окермому ряду, то здібності карті в ряді на який погода не реаплаяться
 
         cardScene.UseAbility(this);
+        cardScene.UpdatePowerLabel();
 
-        /*
+        _richTextLabel.Text = $"{GetPower()}";
+
+        isFull = CheckIfFull();
+    }
+
+    public bool CheckIfFull() {
+        if (row == 4 && children.Count == weatherSize) return true;
+        if (children.Count == rowSize) return true;
+        return false;
+    }
+
+    public void OnWeatherChanged(bool[] activeWeather)
+    {
+        bool isAffected = false;
+        if (row == 1 && activeWeather[1] == true) isAffected = true;
+        else if (row == 2 && activeWeather[2] == true) isAffected = true;
+        else if (row == 3 && activeWeather[3] == true) isAffected = true;
+        ApplyWeatherEffect(isAffected);
+    }
+
+    private void ApplyWeatherEffect(bool isAffected)
+    {
         foreach (CardScene child in children)
         {
-            child.ResetPower();
+            child.isWeatherAffected = isAffected;
+            child.UpdatePower();
         }
-        foreach (CardScene child in children)
-        {
-            child.UseAbility(this);
-        }*/
-
         _richTextLabel.Text = $"{GetPower()}";
     }
 
@@ -67,15 +104,16 @@ public partial class RowScene : Node2D
         newChildren.Remove(card);
         children = newChildren;
 
-        //children.Remove(card);
         RemoveChild(card);
-        UpdateCardPosition(); // Maintain proper positioning
-        _richTextLabel.Text = $"{GetPower()}"; // Update power display
+        UpdateCardPosition();
+        _richTextLabel.Text = $"{GetPower()}";
     }
 
-    public int GetPower(){
+    public int GetPower()
+    {
         power = 0;
-        foreach(CardScene cardScene in children){
+        foreach (CardScene cardScene in children)
+        {
             power += cardScene.power;
         }
         return power;
