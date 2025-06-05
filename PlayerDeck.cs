@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class DeckScene : Node2D
+public partial class PlayerDeck : Node2D
 {
     [Signal]
     public delegate void DeckReadyEventHandler();
