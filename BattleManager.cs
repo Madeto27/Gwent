@@ -19,7 +19,7 @@ public partial class BattleManager : Node2D
 
         battleTimer = GetNode<Timer>("../BattleTimer");
         battleTimer.OneShot = true;
-        battleTimer.WaitTime = 2.0;
+        battleTimer.WaitTime = 1.0;
     }
 
     public void OnEndRoundButtonPressed()

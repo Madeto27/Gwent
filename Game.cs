@@ -44,16 +44,19 @@ public partial class Game : Node2D
     {
         _states = new Dictionary<string, State>();
 
+        var redraw = new RedrawState();
         var playerTurn = new PlayerTurnState();
         var enemyTurn = new EnemyTurnState();
         var roundEnd = new RoundEndState();
         var checkEnd = new CheckRoundEndState();
 
+        AddChild(redraw);
         AddChild(playerTurn);
         AddChild(enemyTurn);
         AddChild(roundEnd);
         AddChild(checkEnd);
 
+        _states.Add("Redraw", redraw);
         _states.Add("PlayerTurn", playerTurn);
         _states.Add("EnemyTurn", enemyTurn);
         _states.Add("RoundEnd", roundEnd);
@@ -64,7 +67,7 @@ public partial class Game : Node2D
             state.game = this;
         }
 
-        ChangeState("PlayerTurn");
+        ChangeState("Redraw");//game by default
 
 
         RowCreator rCreator = new RowCreator();

@@ -6,8 +6,8 @@ using System.Linq;
 public partial class PlayerHand : Node2D
 {
     const int handSize = 10;
-    const int cardWidth = 80;
-    const int handHeight = 1005;
+    public int cardWidth = 80;
+    public int handHeight = 1005;
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
 
@@ -15,12 +15,12 @@ public partial class PlayerHand : Node2D
     {
         base._Ready();
         //on ready draw n amount (10) of cards to hand
-        centerScreenX = GetViewportRect().Size.X/2;
-        DeckScene deck = GetNode<DeckScene>("../DeckScene");
+        centerScreenX = GetViewportRect().Size.X / 2;
+        PlayerDeck deck = GetNode<PlayerDeck>("../PlayerDeck");
         deck.DeckReady += () => DrawInitialHand(deck);
     }
 
-    public void DrawInitialHand(DeckScene deck)
+    public void DrawInitialHand(PlayerDeck deck)
     {
         for (int i = 0; i < handSize; i++)
         {
@@ -30,7 +30,7 @@ public partial class PlayerHand : Node2D
         UpdateHandPosition();
     }
 
-    public void DrawCard(DeckScene deck)
+    public void DrawCard(PlayerDeck deck)
     {
         CardScene card = deck.GetTopCard();
         if (card != null)

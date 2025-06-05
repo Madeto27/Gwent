@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ch3rt4pxwm3vn" path="res://Game.cs" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://cduoj1mvse3yc" path="res://CardManager.cs" id="2_xkndl"]
 [ext_resource type="Script" uid="uid://c3gufy20weewq" path="res://PlayerHand.cs" id="3_u44n3"]
-[ext_resource type="Script" uid="uid://lfhduhacmsn0" path="res://DeckScene.cs" id="4_t88pq"]
+[ext_resource type="Script" uid="uid://djwwp5u4ydegb" path="res://PlayerDeck.cs" id="4_qjyg3"]
 [ext_resource type="Texture2D" uid="uid://bhmdq4wjff5ja" path="res://CardTextures/CardBack.png" id="5_r0x5m"]
 [ext_resource type="Script" uid="uid://lx3sttmxajlb" path="res://BattleManager.cs" id="6_r0x5m"]
 [ext_resource type="Script" uid="uid://drod07so4cx40" path="res://EnemyDeck.cs" id="7_joorw"]
@@ -28,17 +28,17 @@ script = ExtResource("2_xkndl")
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("3_u44n3")
 
-[node name="DeckScene" type="Node2D" parent="."]
+[node name="PlayerDeck" type="Node2D" parent="."]
 position = Vector2(1760, 900)
-script = ExtResource("4_t88pq")
+script = ExtResource("4_qjyg3")
 
-[node name="Sprite2D" type="Sprite2D" parent="DeckScene"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerDeck"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_r0x5m")
 
-[node name="Area2D" type="Area2D" parent="DeckScene"]
+[node name="Area2D" type="Area2D" parent="PlayerDeck"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeckScene/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDeck/Area2D"]
 scale = Vector2(0.25, 0.25)
 shape = SubResource("RectangleShape2D_r0x5m")
 

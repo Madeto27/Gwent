@@ -40,7 +40,7 @@ class Spy : ICardAbility
             targetRow.Add(cardScene);
             if (game.playerRows.Contains(rowScene))
             {
-                var deck = game.GetNode<DeckScene>("DeckScene");
+                var deck = game.GetNode<PlayerDeck>("PlayerDeck");
                 var hand = game.GetNode<PlayerHand>("PlayerHand");
                 hand.DrawCard(deck);
                 hand.DrawCard(deck);

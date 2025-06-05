@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class CardManager : Node2D
 {
@@ -9,18 +10,20 @@ public partial class CardManager : Node2D
     Vector2 screenSize;
     PlayerHand playerHandReference;
     EnemyHand enemyHandReference;
-    DeckScene playerDeckReference;
+    PlayerDeck playerDeckReference;
     EnemyDeck enemyDeckReference;
-    private Game _game;
+    private Game game;
     public bool cardPlayedThisTurn = false;
+    CardScene cardToRedraw;
+    int cardRedraws = 0;
 
     public override void _Ready()
     {
-        _game = GetNode<Game>("..");
+        game = GetNode<Game>("..");
         screenSize = GetViewportRect().Size;
         playerHandReference = GetNode<PlayerHand>("../PlayerHand");
         enemyHandReference = GetNode<EnemyHand>("../EnemyHand");
-        playerDeckReference = GetNode<DeckScene>("../DeckScene");
+        playerDeckReference = GetNode<PlayerDeck>("../PlayerDeck");
         enemyDeckReference = GetNode<EnemyDeck>("../EnemyDeck");
     }
 
@@ -36,7 +39,32 @@ public partial class CardManager : Node2D
 
     public override void _Input(InputEvent @event)
     {
-        if (_game._currentState is EnemyTurnState) return;
+        if (game._currentState is EnemyTurnState) return;
+
+        if (game._currentState is RedrawState redrawState)
+        {
+            if (@event.IsActionPressed("mouse_button_left"))
+            {
+                var card = rayCastCheckForCard();
+                if (card != null)
+                {
+                    playerHandReference.RemoveCardFromHand(card);
+                    card.QueueFree();
+                    playerHandReference.DrawCard(playerDeckReference);
+                    var newCard = playerHandReference.playerHand.Last();
+                    newCard.ZIndex = 2;
+                    newCard.Scale = new Vector2(2, 2);
+                    cardRedraws++;
+                    if (cardRedraws >= 3)
+                    {
+                        game.ChangeState("PlayerTurn");
+                        GD.Print("NOW IS GAME");
+                    }
+                    return;
+                }
+            }
+        }
+
         if (@event.IsAction("mouse_button_left"))
         {
             if (@event.IsPressed())

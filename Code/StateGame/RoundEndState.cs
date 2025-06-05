@@ -6,8 +6,6 @@ public partial class RoundEndState : State
 {
     public override void Enter()
     {
-        base.Enter();
-
         int playerPower = game.GetTotalPlayerPower();
         int enemyPower = game.GetTotalEnemyPower();
 
@@ -41,7 +39,7 @@ public partial class RoundEndState : State
         //relocate all cards to each discard pile
         MoveCardsToDiscard();
 
-        var playerDeck = game.GetNode<DeckScene>("DeckScene");
+        var playerDeck = game.GetNode<PlayerDeck>("PlayerDeck");
         var enemyDeck = game.GetNode<EnemyDeck>("EnemyDeck");
         var playerHand = game.GetNode<PlayerHand>("PlayerHand");
         var enemyHand = game.GetNode<EnemyHand>("EnemyHand");
