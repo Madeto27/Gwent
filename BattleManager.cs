@@ -11,10 +11,10 @@ public partial class BattleManager : Node2D
     public override void _Ready()
     {
         base._Ready();
-        endTurnButton = GetNode<Button>("../EndTurnButton");
+        endTurnButton = GetNode<Button>("../MarginContainer/VBoxContainer/EndTurnButton");
         endTurnButton.Pressed += OnEndTurnButtonPressed;
 
-        endRoundButton = GetNode<Button>("../EndRoundButton");
+        endRoundButton = GetNode<Button>("../MarginContainer/VBoxContainer/EndRoundButton");
         endRoundButton.Pressed += OnEndRoundButtonPressed;
 
         battleTimer = GetNode<Timer>("../BattleTimer");

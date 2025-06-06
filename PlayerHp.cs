@@ -11,7 +11,7 @@ public partial class PlayerHp : Node2D
         hp1 = GetNode<Sprite2D>("1HP");
         hp2 = GetNode<Sprite2D>("2HP");
 
-        hp1.Position = new Vector2(-25, 0);
-        hp2.Position = new Vector2(25, 0);
+        hp1.Position = new Vector2(-30, 0);
+        hp2.Position = new Vector2(30, 0);
     }   
 }

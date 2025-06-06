@@ -10,6 +10,9 @@ public partial class PlayerHand : Node2D
     public int handHeight = 1005;
     public List<CardScene> playerHand = new List<CardScene>();
     public float centerScreenX;
+    private AudioStreamPlayer2D cardDrawSfx;
+    public AudioStreamPlayer2D cardTakeSfx;
+    private AudioStreamPlayer2D cardPlaceSfx;
 
     public override void _Ready()
     {
@@ -17,7 +20,12 @@ public partial class PlayerHand : Node2D
         //on ready draw n amount (10) of cards to hand
         centerScreenX = GetViewportRect().Size.X / 2;
         PlayerDeck deck = GetNode<PlayerDeck>("../PlayerDeck");
+        cardDrawSfx = GetNode<AudioStreamPlayer2D>("CardDrawSfx");
+        cardTakeSfx = GetNode<AudioStreamPlayer2D>("CardTakeSfx");
+        cardPlaceSfx = GetNode<AudioStreamPlayer2D>("CardPlaceSfx");
+
         deck.DeckReady += () => DrawInitialHand(deck);
+
     }
 
     public void DrawInitialHand(PlayerDeck deck)
@@ -42,7 +50,7 @@ public partial class PlayerHand : Node2D
             card._circle.Visible = true;
             card._number.Visible = true;
         }
-
+        cardDrawSfx.Play();
         UpdateHandPosition();
     }
 
@@ -58,7 +66,7 @@ public partial class PlayerHand : Node2D
             {
                 AnimateCardToPosition(cardScene, cardScene.playerHandPosition);
             }
-            cardScene.ZIndex = 1;
+            cardScene.ZIndex = 0;
         }
     }
     
@@ -84,9 +92,11 @@ public partial class PlayerHand : Node2D
     }
 
     public void RemoveCardFromHand(CardScene cardScene){
-        if(playerHand.Contains(cardScene)){
+        if (playerHand.Contains(cardScene))
+        {
             playerHand.Remove(cardScene);
             UpdateHandPosition();
+            cardPlaceSfx.Play();
         }
     }
 }

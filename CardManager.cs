@@ -73,6 +73,8 @@ public partial class CardManager : Node2D
                 if (CanDragCard(card))
                 {
                     cardBeingDragged = card;
+                    cardBeingDragged.ZIndex = 10;
+                    playerHandReference.cardTakeSfx.Play();
                 }
             }
             else if (@event.IsReleased())
@@ -90,6 +92,7 @@ public partial class CardManager : Node2D
                         cardBeingDragged.GetParent().RemoveChild(cardBeingDragged);
                         rowFound.Add(cardBeingDragged);
                         cardBeingDragged.GetNode<CollisionShape2D>("Area2D/CollisionShape2D").Disabled = true;
+                        cardBeingDragged.ZIndex = 0;
                         cardPlayedThisTurn = true;
                     }
                 }

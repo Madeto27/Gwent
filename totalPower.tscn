@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhiqj8ymj6q06"]
+
+[ext_resource type="Texture2D" uid="uid://bfcqsbb0ypc2x" path="res://CardTextures/Circle.png" id="1_7omnf"]
+[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="2_3d4ub"]
+
+[node name="TotalPower" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.145098, 0.0745098, 0, 1)
+texture = ExtResource("1_7omnf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -60.0
+offset_top = -55.0
+offset_right = 60.0
+offset_bottom = 65.0
+theme_override_fonts/normal_font = ExtResource("2_3d4ub")
+theme_override_font_sizes/normal_font_size = 100
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

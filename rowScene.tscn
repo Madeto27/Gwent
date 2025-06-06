@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://woee32a0cfry"]
+[gd_scene load_steps=6 format=3 uid="uid://woee32a0cfry"]
 
 [ext_resource type="Script" uid="uid://drnssriv1jfbt" path="res://RowScene.cs" id="1_n5foc"]
+[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="2_ewn71"]
 [ext_resource type="Texture2D" uid="uid://wbjroujgo2as" path="res://BoardTextures/Row.png" id="2_h6loj"]
+[ext_resource type="Texture2D" uid="uid://bfcqsbb0ypc2x" path="res://CardTextures/Circle.png" id="4_doefb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xkndl"]
 
@@ -9,14 +11,15 @@
 script = ExtResource("1_n5foc")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -2350.0
-offset_top = -125.0
-offset_right = -2310.0
-offset_bottom = -85.0
-scale = Vector2(10, 10)
-theme_override_font_sizes/mono_font_size = 1
+offset_left = -2340.0
+offset_top = -150.0
+offset_right = -2015.0
+offset_bottom = 175.0
+theme_override_fonts/normal_font = ExtResource("2_ewn71")
+theme_override_font_sizes/normal_font_size = 275
 text = "0"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_h6loj")
@@ -27,3 +30,10 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_xkndl")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+position = Vector2(-2175, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("4_doefb")

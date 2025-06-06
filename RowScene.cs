@@ -13,10 +13,12 @@ public partial class RowScene : Node2D
     public List<CardScene> children = new List<CardScene>();
     private float cardScale = 0.2f;
     public float centerScreenX;
-    private Sprite2D _sprite;
+    public Sprite2D weatherSpite = new Sprite2D();
+    public Sprite2D _sprite;
     public Area2D _area;
     public CollisionShape2D _collisionShape;
     public RichTextLabel _richTextLabel;
+    public Sprite2D _circle;
 
 
     public override void _Ready()
@@ -25,9 +27,14 @@ public partial class RowScene : Node2D
         WeatherManager.Instance.Register(this);
         centerScreenX = GetViewportRect().Size.X / 2;
         Position = new Vector2(centerScreenX, 100);
+
+        _circle = GetNode<Sprite2D>("Sprite2D3");
+        _circle.Scale = new Vector2(_circle.Scale.X*cardScale, _circle.Scale.Y*cardScale);
+        _circle.Position = new Vector2(_circle.Position.X*cardScale, _circle.Position.Y*cardScale);
+
         _richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
-        _richTextLabel.Scale = new Vector2(cardScale*10, cardScale*10);
-        _richTextLabel.Position = new Vector2(-500,-25);
+        _richTextLabel.Scale = new Vector2(cardScale, cardScale);
+        _richTextLabel.Position = new Vector2(_richTextLabel.Position.X*cardScale, _richTextLabel.Position.Y*cardScale);
     }
 
     public void Add(CardScene cardScene)
@@ -36,7 +43,7 @@ public partial class RowScene : Node2D
         AddChild(cardScene);
         cardScene.Position = Vector2.Zero;
         UpdateCardPosition();
-        cardScene.ZIndex = ZIndex;
+        cardScene.ZIndex = ZIndex+1;
 
         bool[] activeWeather = WeatherManager.Instance.activeWeather;
         if (row == 1) cardScene.isWeatherAffected = activeWeather[1];
@@ -44,31 +51,33 @@ public partial class RowScene : Node2D
         else if (row == 3) cardScene.isWeatherAffected = activeWeather[3];
 
         List<CardScene> childrenCopy = children;
-        //var weather = GetNode<WeatherManager>("../WeatherManager");
-        //OnWeatherChanged(weather.activeWeather); //АБІЛКИ НЕ РАХУЮТЬСЯ ЧОГОСЬ
 
         foreach (CardScene child in childrenCopy)
         {
             child.UpdatePower();
-            //child.ResetPower();
+            if (child.ability is MoraleBoost){
+                child.ResetPower();
+            }
         }
         foreach (CardScene child in children)
         {
             if (children.Contains(child) && child != cardScene)
             {
                 child.UseAbility(this);
-                child.UpdatePowerLabel(); //nothing happens if card placed after
-                //child.UpdatePower(); //nothing happens if card placed after, BUT if another weather card placed it fixes
+                //child.UpdatePowerLabel();
             }
         }
-
-        //коли додаю нову погоду, то стара реаплаїться
-        //так як вони в окермому ряду, то здібності карті в ряді на який погода не реаплаяться
-
         cardScene.UseAbility(this);
-        cardScene.UpdatePowerLabel();
+
+        foreach (CardScene child in children)
+        {
+            child.UpdatePowerLabel();
+        }
+        //cardScene.UpdatePowerLabel();
 
         _richTextLabel.Text = $"{GetPower()}";
+        GetNode<Game>("..").playerTotalPower.Text = $"{GetNode<Game>("..").GetTotalPlayerPower()}";
+        GetNode<Game>("..").enemyTotalPower.Text = $"{GetNode<Game>("..").GetTotalEnemyPower()}";
 
         isFull = CheckIfFull();
     }
@@ -130,9 +139,9 @@ public partial class RowScene : Node2D
 
         Texture2D tex;
         if (row == 4)
-            tex = GD.Load<Texture2D>("res://BoardTextures/WeatherRow.png");
+            tex = GD.Load<Texture2D>("res://BoardTextures/WeatherRowWider1.png");
         else
-            tex = GD.Load<Texture2D>("res://BoardTextures/Row.png");
+            tex = GD.Load<Texture2D>("res://BoardTextures/Row2.png");
 
         _sprite.Texture = tex;
         _sprite.Scale = new Vector2(cardScale, cardScale);

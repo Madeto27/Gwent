@@ -6,13 +6,18 @@ public partial class Game : Node2D
     [Export] public NodePath initialState;
     private Dictionary<string, State> _states;
     public State _currentState { get; private set; }
-    public int score = 0;
+    public int[] score = new int[2];
     public bool playerPassed = false;
     public bool enemyPassed = false;
     public bool lastStateWasPlayer;
     public RowScene[] playerRows = new RowScene[3];
     public RowScene[] enemyRows = new RowScene[3];
+    public RichTextLabel playerTotalPower;
+    public RichTextLabel enemyTotalPower;
     public RowScene weatherRow;
+    public TurnLabel turnLabel;
+    public ColorRect background;
+
 
     public int GetTotalPlayerPower()
     {
@@ -88,13 +93,14 @@ public partial class Game : Node2D
         int enemyRowHeight = 390;
         for (int i = 0; i < 3; i++)
         {
-            enemyRows[i] = rCreator.CreateRow(i+1);
+            enemyRows[i] = rCreator.CreateRow(i + 1);
             if (enemyRows[i] != null)
             {
                 enemyRows[i]._collisionShape.QueueFree();
                 AddChild(enemyRows[i]);
                 enemyRows[2] = enemyRows[i];
                 enemyRows[i].GlobalPosition = new Vector2(1920 / 2, enemyRowHeight);
+                enemyRows[i]._circle.Modulate = new Color(0.75f, 0.15f, 0.15f);//making a bit red
             }
             enemyRowHeight -= 155;
         }
@@ -105,5 +111,9 @@ public partial class Game : Node2D
             AddChild(weatherRow);
             weatherRow.GlobalPosition = new Vector2(1920 / 8, 1080 / 2);
         }
+
+        turnLabel = GetNode<TurnLabel>("TurnLabel");
+        playerTotalPower = GetNode<RichTextLabel>("PlayerTotalPower/RichTextLabel");
+        enemyTotalPower = GetNode<RichTextLabel>("EnemyTotalPower/RichTextLabel");
     }
 }
