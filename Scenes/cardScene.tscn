@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cv4qp8ox6eo51"]
 
-[ext_resource type="Script" uid="uid://c4eqto7bt8ubl" path="res://Code/FactoryCard/UnitCards/UnitCard.cs" id="1_64stc"]
-[ext_resource type="Texture2D" uid="uid://bhmdq4wjff5ja" path="res://CardTextures/CardBack.png" id="2_8vm5s"]
-[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="3_6gg5k"]
-[ext_resource type="Texture2D" uid="uid://bfcqsbb0ypc2x" path="res://CardTextures/Circle.png" id="4_4ueie"]
+[ext_resource type="Script" uid="uid://c4eqto7bt8ubl" path="res://Code/FactoryCard/UnitCards/UnitCard.cs" id="1_ne4wj"]
+[ext_resource type="Texture2D" uid="uid://bhmdq4wjff5ja" path="res://CardTextures/CardBack.png" id="2_0umba"]
+[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="3_kxcxe"]
+[ext_resource type="Texture2D" uid="uid://bfcqsbb0ypc2x" path="res://CardTextures/Circle.png" id="4_64sm4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64stc"]
 
@@ -116,7 +116,7 @@ _data = {
 }
 
 [node name="CardScene" type="Node2D"]
-script = ExtResource("1_64stc")
+script = ExtResource("1_ne4wj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
@@ -133,7 +133,7 @@ libraries = {
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_8vm5s")
+texture = ExtResource("2_0umba")
 
 [node name="Power" type="RichTextLabel" parent="."]
 z_index = 1
@@ -142,7 +142,7 @@ offset_top = -75.0
 offset_right = -11.5
 offset_bottom = -44.0
 pivot_offset = Vector2(15.5, 15.5)
-theme_override_fonts/normal_font = ExtResource("3_6gg5k")
+theme_override_fonts/normal_font = ExtResource("3_kxcxe")
 theme_override_font_sizes/normal_font_size = 20
 text = "1"
 horizontal_alignment = 1
@@ -151,4 +151,4 @@ vertical_alignment = 1
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 position = Vector2(-27, -59.5)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_4ueie")
+texture = ExtResource("4_64sm4")

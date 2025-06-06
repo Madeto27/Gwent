@@ -4,7 +4,6 @@ using System;
 public partial class TurnLabel : Node2D
 {
     public RichTextLabel label;
-    //public ColorRect background;
     public Sprite2D sprite;
     public AnimationPlayer animationPlayer;
     public override void _Ready()

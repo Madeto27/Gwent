@@ -4,7 +4,6 @@ using Godot;
 
 public partial class RoundEndState : State
 {
-    //somehow AI placed 2nd forst bite
     public async override void Enter()
     {
         game.turnLabel.ShowTurnLabel("Round End");

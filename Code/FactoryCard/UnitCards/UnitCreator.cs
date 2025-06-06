@@ -26,7 +26,7 @@ class UnitCreator : Creator
 
         var tempData = data[cardId];
 
-        var cardScene = GD.Load<PackedScene>("res://cardScene.tscn");
+        var cardScene = GD.Load<PackedScene>("res://Scenes/cardScene.tscn");
         UnitCard unitCard = (UnitCard)cardScene.Instantiate();
 
         unitCard.name = tempData.GetProperty("name").GetString();

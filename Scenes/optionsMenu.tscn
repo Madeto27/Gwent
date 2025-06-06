@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://g5a4nljfq5mf"]
 
-[ext_resource type="Script" uid="uid://dw1ii5rd0rcma" path="res://OptionsMenu.cs" id="1_elxip"]
-[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="2_2n46e"]
-[ext_resource type="Script" uid="uid://cmfacj0c84gvm" path="res://MusicSlider.cs" id="2_3wkf7"]
-[ext_resource type="Script" uid="uid://bgvv7h0nn0yy1" path="res://SfxSlider.cs" id="3_3wkf7"]
-[ext_resource type="Texture2D" uid="uid://b5y30odpv0fr6" path="res://BoardTextures/Table.jpg" id="5_17jbq"]
+[ext_resource type="Script" uid="uid://dw1ii5rd0rcma" path="res://Code/ScenesCode/OptionsMenu.cs" id="1_0yuq2"]
+[ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="2_8gbdx"]
+[ext_resource type="Script" uid="uid://cmfacj0c84gvm" path="res://Code/UI/MusicSlider.cs" id="3_8gbdx"]
+[ext_resource type="Script" uid="uid://bgvv7h0nn0yy1" path="res://Code/UI/SfxSlider.cs" id="4_hgx53"]
+[ext_resource type="Texture2D" uid="uid://b5y30odpv0fr6" path="res://BoardTextures/Table.jpg" id="5_xdoqj"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_elxip")
+script = ExtResource("1_0yuq2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -26,7 +26,7 @@ layout_mode = 2
 [node name="MusicLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 41)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_2n46e")
+theme_override_fonts/normal_font = ExtResource("2_8gbdx")
 theme_override_font_sizes/normal_font_size = 40
 text = "MUSIC"
 horizontal_alignment = 1
@@ -36,12 +36,12 @@ vertical_alignment = 1
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-script = ExtResource("2_3wkf7")
+script = ExtResource("3_8gbdx")
 
 [node name="SfxLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 41)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_2n46e")
+theme_override_fonts/normal_font = ExtResource("2_8gbdx")
 theme_override_font_sizes/normal_font_size = 40
 text = "Sfx"
 horizontal_alignment = 1
@@ -51,11 +51,11 @@ vertical_alignment = 1
 layout_mode = 2
 max_value = 1.0
 step = 0.001
-script = ExtResource("3_3wkf7")
+script = ExtResource("4_hgx53")
 
 [node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2n46e")
+theme_override_fonts/font = ExtResource("2_8gbdx")
 theme_override_font_sizes/font_size = 60
 text = "Back"
 
@@ -63,4 +63,4 @@ text = "Back"
 modulate = Color(0.458405, 0.458405, 0.458405, 1)
 z_index = -10
 position = Vector2(960, 540)
-texture = ExtResource("5_17jbq")
+texture = ExtResource("5_xdoqj")

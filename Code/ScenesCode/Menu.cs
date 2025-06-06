@@ -26,12 +26,12 @@ public partial class Menu : Control
 
     void OnPlayButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://Game.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
     }
 
     void OnOptionsButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://optionsMenu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/optionsMenu.tscn");
     }
 
     void OnQuitButtonPressed()

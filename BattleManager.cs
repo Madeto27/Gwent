@@ -43,33 +43,7 @@ public partial class BattleManager : Node2D
     {
         if (!GetNode<CardManager>("../CardManager").cardPlayedThisTurn) return;
         GetNode<Game>("..").ChangeState("EnemyTurn");
-        //EnemyTurn();
     }
-
-    /*
-    public async void EnemyTurn()
-    {
-        endTurnButton.Disabled = true;
-        endTurnButton.Visible = false;
-        battleTimer.Start();
-
-        var enemyHand = GetNode<EnemyHand>("../EnemyHand").enemyHand;
-        if (enemyHand.Count == 0)
-        {
-            return;
-        }
-
-        Random rnd = new Random();
-
-        await ToSignal(battleTimer, Timer.SignalName.Timeout);
-        PlayCard(enemyHand[rnd.Next(0, enemyHand.Count)]);
-
-        //place card 
-        //await ToSignal(battleTimer, Timer.SignalName.Timeout);
-
-        GetNode<Game>("..").ChangeState("EnemyTurn");
-    }*/
-
     public void PlayCard(CardScene cardScene)
     {
         var game = GetNode<Game>("..");
@@ -84,9 +58,3 @@ public partial class BattleManager : Node2D
     }
 
 }
-
-
-//at first play cards with low power
-        //then place cards with abilites
-        //place cards with highest power
-        //after 1 second play a card

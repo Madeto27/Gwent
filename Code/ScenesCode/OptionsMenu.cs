@@ -20,6 +20,6 @@ public partial class OptionsMenu : Control
 
     void OnBackButtonPressed()
     {
-        GetTree().ChangeSceneToFile("res://menu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/menu.tscn");
     }
 }
