@@ -46,12 +46,15 @@ script = ExtResource("3_u44n3")
 
 [node name="CardDrawSfx" type="AudioStreamPlayer2D" parent="PlayerHand"]
 stream = ExtResource("5_hmewc")
+bus = &"Sfx"
 
 [node name="CardTakeSfx" type="AudioStreamPlayer2D" parent="PlayerHand"]
 stream = ExtResource("6_0mevm")
+bus = &"Sfx"
 
 [node name="CardPlaceSfx" type="AudioStreamPlayer2D" parent="PlayerHand"]
 stream = ExtResource("7_w2501")
+bus = &"Sfx"
 
 [node name="PlayerDeck" type="Node2D" parent="."]
 position = Vector2(1760, 900)
@@ -80,12 +83,15 @@ script = ExtResource("8_2vekm")
 
 [node name="CardDrawSfx" type="AudioStreamPlayer2D" parent="EnemyHand"]
 stream = ExtResource("5_hmewc")
+bus = &"Sfx"
 
 [node name="CardTakeSfx" type="AudioStreamPlayer2D" parent="EnemyHand"]
 stream = ExtResource("6_0mevm")
+bus = &"Sfx"
 
 [node name="CardPlaceSfx" type="AudioStreamPlayer2D" parent="EnemyHand"]
 stream = ExtResource("7_w2501")
+bus = &"Sfx"
 
 [node name="PlayerDiscard" type="Node2D" parent="."]
 position = Vector2(1660, 900)
@@ -163,7 +169,7 @@ text = "End Round"
 layout_mode = 2
 text = "End Turn"
 
-[node name="AudioStreamPlayer2D" parent="." instance=ExtResource("20_cpsxm")]
+[node name="BackgroundMusic" parent="." instance=ExtResource("20_cpsxm")]
 
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 40.0

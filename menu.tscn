@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://chf36jaas3nu7"]
+[gd_scene load_steps=4 format=3 uid="uid://chf36jaas3nu7"]
 
 [ext_resource type="Script" uid="uid://blc1kgtb01ttl" path="res://Menu.cs" id="1_lti8b"]
 [ext_resource type="FontFile" uid="uid://bebww3to8wooa" path="res://BoardTextures/TheWitcherFont.ttf" id="2_ouk20"]
+[ext_resource type="Texture2D" uid="uid://b5y30odpv0fr6" path="res://BoardTextures/Table.jpg" id="3_mae5d"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -37,6 +38,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ouk20")
 theme_override_font_sizes/font_size = 60
 text = "Quit"
+
+[node name="Table" type="Sprite2D" parent="."]
+modulate = Color(0.458405, 0.458405, 0.458405, 1)
+z_index = -10
+position = Vector2(960, 540)
+texture = ExtResource("3_mae5d")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
